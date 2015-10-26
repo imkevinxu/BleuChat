@@ -1,0 +1,31 @@
+PODS:
+  - Expecta (1.0.3)
+  - OCMock (3.2)
+  - OHHTTPStubs (4.4.0):
+    - OHHTTPStubs/Default (= 4.4.0)
+  - OHHTTPStubs/Core (4.4.0)
+  - OHHTTPStubs/Default (4.4.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (4.4.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (4.4.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (4.4.0)
+  - Specta (1.0.4)
+
+DEPENDENCIES:
+  - Expecta
+  - OCMock
+  - OHHTTPStubs
+  - Specta
+
+SPEC CHECKSUMS:
+  Expecta: 9d1bff6c8b0eeee73a166a2ee898892478927a15
+  OCMock: 28def049ef47f996b515a8eeea958be7ccab2dbb
+  OHHTTPStubs: 1a95a653b78287a1fdb44eb38364b43257ac3550
+  Specta: 69bb134672aae190a1379ff91df07dad8dd1f869
+
+COCOAPODS: 0.39.0

@@ -1,0 +1,656 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B7ECA1CAAA9519B3238B3DD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8106AA41FDC38D91A4DCD3A0 /* Settings.bundle */; };
+		165496758F1AD920D6C35240 /* libPods-unit_tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1D7F89A937C4EA13CE71 /* libPods-unit_tests.a */; };
+		259E2F634BCF97FD8FAE38B1 /* LaunchScreen.xib in Sources */ = {isa = PBXBuildFile; fileRef = C0187506B3B55080D093EAFA /* LaunchScreen.xib */; };
+		698E1ABE2A4BC8B9A68284CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796F8DB390C5B78EB986C4F5 /* AppDelegate.swift */; };
+		8D7B6A061EBA857E4562B58A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2EE17BF5A7C95A57D3A9D6F /* Images.xcassets */; };
+		AEC041F55EBEFE6A8646B2A3 /* Main.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = A65EC78F039804DE75C93869 /* Main.storyboard */; };
+		BF14094B3B3D6712C28A4816 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4E3B1AE1B61D7A2B701930 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		221805B11CBB955062DAE365 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AAB324219AE522CC5EF69277 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3879F06FEBCFF2CA3041B91B;
+			remoteInfo = BleuChat;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4999B8152B0146EBF3607665 /* BleuChat Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BleuChat Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A5030460F664BDA0CF52AF1 /* BleuChat Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BleuChat Tests-Info.plist"; sourceTree = "<group>"; };
+		62944328BA49CA66E0186D38 /* Pods-unit_tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unit_tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-unit_tests/Pods-unit_tests.release.xcconfig"; sourceTree = "<group>"; };
+		796F8DB390C5B78EB986C4F5 /* AppDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8106AA41FDC38D91A4DCD3A0 /* Settings.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		A65EC78F039804DE75C93869 /* Main.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		AD4E3B1AE1B61D7A2B701930 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		B2EE17BF5A7C95A57D3A9D6F /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C0187506B3B55080D093EAFA /* LaunchScreen.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		DC0E1D7F89A937C4EA13CE71 /* libPods-unit_tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-unit_tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA74BE4E64A96B423827583 /* BleuChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BleuChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1BACDF9AEA9EC0CFFAE137B /* Pods-unit_tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unit_tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-unit_tests/Pods-unit_tests.debug.xcconfig"; sourceTree = "<group>"; };
+		F017CC5BDEE17240A999AE06 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8BA9E410DBB6557BBBDFB91C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				165496758F1AD920D6C35240 /* libPods-unit_tests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F93578E58861BE13B0076A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF14094B3B3D6712C28A4816 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0084730B02CFBCE2D09E1263 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCA74BE4E64A96B423827583 /* BleuChat.app */,
+				4999B8152B0146EBF3607665 /* BleuChat Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		09F7D74DC3DBA8E51DFCBB29 /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				C0187506B3B55080D093EAFA /* LaunchScreen.xib */,
+			);
+			path = Nibs;
+			sourceTree = "<group>";
+		};
+		0CC0FF07470B53BD42D2DFE8 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				AD4E3B1AE1B61D7A2B701930 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		175782B9E8DFDF2992B601F1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		176DCE07744978632875ABD1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				62944328BA49CA66E0186D38 /* Pods-unit_tests.release.xcconfig */,
+				E1BACDF9AEA9EC0CFFAE137B /* Pods-unit_tests.debug.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		3C65F3997264114281DA7293 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B2EE17BF5A7C95A57D3A9D6F /* Images.xcassets */,
+				E9B378E1385ED0ED31EACBF9 /* Storyboards */,
+				09F7D74DC3DBA8E51DFCBB29 /* Nibs */,
+				BD753EE41A9408EA177363B9 /* Other-Sources */,
+				8106AA41FDC38D91A4DCD3A0 /* Settings.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4E34075284320A9C1B35F618 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7B95688966EA19AE8E7727F8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		82FA80FAD7820B076D8A2CA7 /* BleuChat Tests */ = {
+			isa = PBXGroup;
+			children = (
+				9CCC4ACDB803F266F5CC31F2 /* Resources */,
+				7B95688966EA19AE8E7727F8 /* Helpers */,
+				9BF1F7F874B99FC086411713 /* Tests */,
+			);
+			path = "BleuChat Tests";
+			sourceTree = "<group>";
+		};
+		84DA4B6582327944F5D46BB4 /* BleuChat */ = {
+			isa = PBXGroup;
+			children = (
+				175782B9E8DFDF2992B601F1 /* Extensions */,
+				DC70790DB5B49C70E3CCC979 /* Protocols */,
+				D725293D87C9F5A5E47757A2 /* Models */,
+				4E34075284320A9C1B35F618 /* ViewModels */,
+				BC774B2C31454577941C8530 /* Controllers */,
+				D511965AF58DF8C2D0DAE83B /* Views */,
+				3C65F3997264114281DA7293 /* Resources */,
+			);
+			path = BleuChat;
+			sourceTree = "<group>";
+		};
+		97DCB56167685426191D4A63 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CC0FF07470B53BD42D2DFE8 /* iOS */,
+				DC0E1D7F89A937C4EA13CE71 /* libPods-unit_tests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9BF1F7F874B99FC086411713 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		9CCC4ACDB803F266F5CC31F2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4A5030460F664BDA0CF52AF1 /* BleuChat Tests-Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A41A0B9585DC6CFA1A5E2743 = {
+			isa = PBXGroup;
+			children = (
+				84DA4B6582327944F5D46BB4 /* BleuChat */,
+				82FA80FAD7820B076D8A2CA7 /* BleuChat Tests */,
+				97DCB56167685426191D4A63 /* Frameworks */,
+				0084730B02CFBCE2D09E1263 /* Products */,
+				176DCE07744978632875ABD1 /* Pods */,
+			);
+			indentWidth = 4;
+			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 0;
+		};
+		BC774B2C31454577941C8530 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				796F8DB390C5B78EB986C4F5 /* AppDelegate.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		BD753EE41A9408EA177363B9 /* Other-Sources */ = {
+			isa = PBXGroup;
+			children = (
+				F017CC5BDEE17240A999AE06 /* Info.plist */,
+			);
+			path = "Other-Sources";
+			sourceTree = "<group>";
+		};
+		D511965AF58DF8C2D0DAE83B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D725293D87C9F5A5E47757A2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DC70790DB5B49C70E3CCC979 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		E9B378E1385ED0ED31EACBF9 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A65EC78F039804DE75C93869 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3879F06FEBCFF2CA3041B91B /* BleuChat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8230A21485937660EFED8D69 /* Build configuration list for PBXNativeTarget "BleuChat" */;
+			buildPhases = (
+				EC50743CAC3CC8D21A38EE22 /* Sources */,
+				8F93578E58861BE13B0076A9 /* Frameworks */,
+				B55F865C8B5C514314A3FCE4 /* Resources */,
+				493CEAB1D24CF355D0D409BC /* Warn for TODO and FIXME comments */,
+				7F2EBC2A0B9EF76C8DDB35E0 /* Set version number */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BleuChat;
+			productName = BleuChat;
+			productReference = DCA74BE4E64A96B423827583 /* BleuChat.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4EC03EF39A8B6D51BCE3801D /* BleuChat Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 33F38704C070A60D25C7E06B /* Build configuration list for PBXNativeTarget "BleuChat Tests" */;
+			buildPhases = (
+				C337A9C6BF834039F7332CEF /* Check Pods Manifest.lock */,
+				211D377DFABE430C00A53F8F /* Sources */,
+				8BA9E410DBB6557BBBDFB91C /* Frameworks */,
+				A9947E1DEFEDDC90C3DF1A70 /* Resources */,
+				D3120672C647A953D13FAB1B /* Embed Pods Frameworks */,
+				BEE5236BCF42C11B92A08FAC /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B0087C3D05722D9E0468B0A1 /* PBXTargetDependency */,
+			);
+			name = "BleuChat Tests";
+			productName = "BleuChat Tests";
+			productReference = 4999B8152B0146EBF3607665 /* BleuChat Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AAB324219AE522CC5EF69277 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = BC;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Kevin Xu";
+			};
+			buildConfigurationList = F4E77667C2D81F085FED234E /* Build configuration list for PBXProject "BleuChat" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A41A0B9585DC6CFA1A5E2743;
+			productRefGroup = 0084730B02CFBCE2D09E1263 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3879F06FEBCFF2CA3041B91B /* BleuChat */,
+				4EC03EF39A8B6D51BCE3801D /* BleuChat Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A9947E1DEFEDDC90C3DF1A70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B55F865C8B5C514314A3FCE4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D7B6A061EBA857E4562B58A /* Images.xcassets in Resources */,
+				0B7ECA1CAAA9519B3238B3DD /* Settings.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		493CEAB1D24CF355D0D409BC /* Warn for TODO and FIXME comments */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Warn for TODO and FIXME comments";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "KEYWORDS=\"TODO:|FIXME:|\\?\\?\\?:|\\!\\!\\!:\"\nFILE_EXTENSIONS=\"swift|h|m|mm|c|cpp\"\nfind -E \"${SRCROOT}\" -ipath \"${SRCROOT}/pods\" -prune -o \\( -regex \".*\\.($FILE_EXTENSIONS)$\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"\n";
+		};
+		7F2EBC2A0B9EF76C8DDB35E0 /* Set version number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set version number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "git=$(sh /etc/profile; which git)\ngit_release_version=$(\"$git\" describe --tags --always --abbrev=0)\nnumber_of_commits=$(\"$git\" rev-list master | wc -l | tr -d ' ')\ntarget_plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\ndsym_plist=\"$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist\"\n\nfor plist in \"$target_plist\" \"$dsym_plist\"; do\n  if [ -f \"$plist\" ]; then\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $number_of_commits\" \"$plist\"\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${git_release_version#*v}\" \"$plist\"\n  fi\ndone\n";
+		};
+		BEE5236BCF42C11B92A08FAC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-unit_tests/Pods-unit_tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C337A9C6BF834039F7332CEF /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D3120672C647A953D13FAB1B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-unit_tests/Pods-unit_tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		211D377DFABE430C00A53F8F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC50743CAC3CC8D21A38EE22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				698E1ABE2A4BC8B9A68284CF /* AppDelegate.swift in Sources */,
+				AEC041F55EBEFE6A8646B2A3 /* Main.storyboard in Sources */,
+				259E2F634BCF97FD8FAE38B1 /* LaunchScreen.xib in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B0087C3D05722D9E0468B0A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3879F06FEBCFF2CA3041B91B /* BleuChat */;
+			targetProxy = 221805B11CBB955062DAE365 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		57333D9812E8B5C0262A5AE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "BleuChat/Resources/Other-Sources/Info.plist";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		758F57AF45FC8B38D27DBD6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				INFOPLIST_FILE = "BleuChat/Resources/Other-Sources/Info.plist";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A85AC24D6EC6DCBFCA67F5AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VALUE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DE93B37AB85959C9AE19A2C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1BACDF9AEA9EC0CFFAE137B /* Pods-unit_tests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BleuChat.app/BleuChat";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				INFOPLIST_FILE = "BleuChat Tests/Resources/BleuChat Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		F0AC2DDB2800700B909F6B96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62944328BA49CA66E0186D38 /* Pods-unit_tests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BleuChat.app/BleuChat";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				INFOPLIST_FILE = "BleuChat Tests/Resources/BleuChat Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		F7655F3377265FCA5C04804F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VALUE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		33F38704C070A60D25C7E06B /* Build configuration list for PBXNativeTarget "BleuChat Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F0AC2DDB2800700B909F6B96 /* Release */,
+				DE93B37AB85959C9AE19A2C1 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8230A21485937660EFED8D69 /* Build configuration list for PBXNativeTarget "BleuChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				758F57AF45FC8B38D27DBD6D /* Release */,
+				57333D9812E8B5C0262A5AE2 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F4E77667C2D81F085FED234E /* Build configuration list for PBXProject "BleuChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A85AC24D6EC6DCBFCA67F5AA /* Debug */,
+				F7655F3377265FCA5C04804F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AAB324219AE522CC5EF69277 /* Project object */;
+}
