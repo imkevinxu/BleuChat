@@ -47,6 +47,7 @@
 		21C1EACD1BDE19EA008A482E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Application/AppDelegate.swift; sourceTree = "<group>"; };
 		21C1EACF1BDE1A22008A482E /* BleuChat-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BleuChat-Bridging-Header.h"; path = "Application/BleuChat-Bridging-Header.h"; sourceTree = "<group>"; };
 		21C1EAD11BDE1CA8008A482E /* BCMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCMainViewController.swift; sourceTree = "<group>"; };
+		21F024701BDE200000F9D05E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4850CA3ED004566C4D19E393 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AD4E3B1AE1B61D7A2B701930 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		B2EE17BF5A7C95A57D3A9D6F /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -194,6 +195,7 @@
 		A41A0B9585DC6CFA1A5E2743 = {
 			isa = PBXGroup;
 			children = (
+				21F024701BDE200000F9D05E /* README.md */,
 				84DA4B6582327944F5D46BB4 /* BleuChat */,
 				21866C3C1BDE0E0300B7653C /* BleuChat UI Tests */,
 				21866C2E1BDE0DCC00B7653C /* BleuChat Unit Tests */,
