@@ -32,9 +32,19 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4EC03EF39A8B6D51BCE3801D"
-               BuildableName = "BleuChat Tests.xctest"
-               BlueprintName = "BleuChat Tests"
+               BlueprintIdentifier = "21866C2C1BDE0DCC00B7653C"
+               BuildableName = "BleuChat Unit Tests.xctest"
+               BlueprintName = "BleuChat Unit Tests"
+               ReferencedContainer = "container:BleuChat.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "21866C3A1BDE0E0300B7653C"
+               BuildableName = "BleuChat UI Tests.xctest"
+               BlueprintName = "BleuChat UI Tests"
                ReferencedContainer = "container:BleuChat.xcodeproj">
             </BuildableReference>
          </TestableReference>

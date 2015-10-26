@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		165496758F1AD920D6C35240 /* libPods-unit_tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1D7F89A937C4EA13CE71 /* libPods-unit_tests.a */; };
-		1FF73AFCED591AA2AC8938A5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106A0299BA7AEB072EDE4839 /* Pods.framework */; };
+		21866C301BDE0DCC00B7653C /* BCMainUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21866C2F1BDE0DCC00B7653C /* BCMainUnitTests.swift */; };
+		21866C3E1BDE0E0300B7653C /* BCMainUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21866C3D1BDE0E0300B7653C /* BCMainUITests.swift */; };
 		259E2F634BCF97FD8FAE38B1 /* LaunchScreen.xib in Sources */ = {isa = PBXBuildFile; fileRef = C0187506B3B55080D093EAFA /* LaunchScreen.xib */; };
 		698E1ABE2A4BC8B9A68284CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796F8DB390C5B78EB986C4F5 /* AppDelegate.swift */; };
 		746C4D15103D9A893529E19E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106A0299BA7AEB072EDE4839 /* Pods.framework */; };
@@ -17,7 +17,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		221805B11CBB955062DAE365 /* PBXContainerItemProxy */ = {
+		21866C321BDE0DCC00B7653C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AAB324219AE522CC5EF69277 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3879F06FEBCFF2CA3041B91B;
+			remoteInfo = BleuChat;
+		};
+		21866C401BDE0E0300B7653C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AAB324219AE522CC5EF69277 /* Project object */;
 			proxyType = 1;
@@ -28,26 +35,34 @@
 
 /* Begin PBXFileReference section */
 		106A0299BA7AEB072EDE4839 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21866C2D1BDE0DCC00B7653C /* BleuChat Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BleuChat Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		21866C2F1BDE0DCC00B7653C /* BCMainUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCMainUnitTests.swift; sourceTree = "<group>"; };
+		21866C311BDE0DCC00B7653C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21866C3B1BDE0E0300B7653C /* BleuChat UI Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BleuChat UI Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		21866C3D1BDE0E0300B7653C /* BCMainUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCMainUITests.swift; sourceTree = "<group>"; };
+		21866C3F1BDE0E0300B7653C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4850CA3ED004566C4D19E393 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		4999B8152B0146EBF3607665 /* BleuChat Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BleuChat Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A5030460F664BDA0CF52AF1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		796F8DB390C5B78EB986C4F5 /* AppDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD4E3B1AE1B61D7A2B701930 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		B2EE17BF5A7C95A57D3A9D6F /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C0187506B3B55080D093EAFA /* LaunchScreen.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		DC0E1D7F89A937C4EA13CE71 /* libPods-unit_tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-unit_tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA74BE4E64A96B423827583 /* BleuChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BleuChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F017CC5BDEE17240A999AE06 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3A84AB5871C56B4B3AAF9B2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8BA9E410DBB6557BBBDFB91C /* Frameworks */ = {
+		21866C2A1BDE0DCC00B7653C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				165496758F1AD920D6C35240 /* libPods-unit_tests.a in Frameworks */,
-				1FF73AFCED591AA2AC8938A5 /* Pods.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21866C381BDE0E0300B7653C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,7 +82,8 @@
 			isa = PBXGroup;
 			children = (
 				DCA74BE4E64A96B423827583 /* BleuChat.app */,
-				4999B8152B0146EBF3607665 /* BleuChat Tests.xctest */,
+				21866C2D1BDE0DCC00B7653C /* BleuChat Unit Tests.xctest */,
+				21866C3B1BDE0E0300B7653C /* BleuChat UI Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,6 +120,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		21866C2E1BDE0DCC00B7653C /* BleuChat Unit Tests */ = {
+			isa = PBXGroup;
+			children = (
+				21866C2F1BDE0DCC00B7653C /* BCMainUnitTests.swift */,
+				21866C311BDE0DCC00B7653C /* Info.plist */,
+			);
+			path = "BleuChat Unit Tests";
+			sourceTree = "<group>";
+		};
+		21866C3C1BDE0E0300B7653C /* BleuChat UI Tests */ = {
+			isa = PBXGroup;
+			children = (
+				21866C3D1BDE0E0300B7653C /* BCMainUITests.swift */,
+				21866C3F1BDE0E0300B7653C /* Info.plist */,
+			);
+			path = "BleuChat UI Tests";
+			sourceTree = "<group>";
+		};
 		3C65F3997264114281DA7293 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,23 +153,6 @@
 			children = (
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		7B95688966EA19AE8E7727F8 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		82FA80FAD7820B076D8A2CA7 /* BleuChat Tests */ = {
-			isa = PBXGroup;
-			children = (
-				9CCC4ACDB803F266F5CC31F2 /* Resources */,
-				7B95688966EA19AE8E7727F8 /* Helpers */,
-				9BF1F7F874B99FC086411713 /* Tests */,
-			);
-			path = "BleuChat Tests";
 			sourceTree = "<group>";
 		};
 		84DA4B6582327944F5D46BB4 /* BleuChat */ = {
@@ -156,32 +173,17 @@
 			isa = PBXGroup;
 			children = (
 				0CC0FF07470B53BD42D2DFE8 /* iOS */,
-				DC0E1D7F89A937C4EA13CE71 /* libPods-unit_tests.a */,
 				106A0299BA7AEB072EDE4839 /* Pods.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9BF1F7F874B99FC086411713 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		9CCC4ACDB803F266F5CC31F2 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				4A5030460F664BDA0CF52AF1 /* Info.plist */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		A41A0B9585DC6CFA1A5E2743 = {
 			isa = PBXGroup;
 			children = (
 				84DA4B6582327944F5D46BB4 /* BleuChat */,
-				82FA80FAD7820B076D8A2CA7 /* BleuChat Tests */,
+				21866C3C1BDE0E0300B7653C /* BleuChat UI Tests */,
+				21866C2E1BDE0DCC00B7653C /* BleuChat Unit Tests */,
 				97DCB56167685426191D4A63 /* Frameworks */,
 				0084730B02CFBCE2D09E1263 /* Products */,
 				176DCE07744978632875ABD1 /* Pods */,
@@ -231,6 +233,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		21866C2C1BDE0DCC00B7653C /* BleuChat Unit Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21866C361BDE0DCD00B7653C /* Build configuration list for PBXNativeTarget "BleuChat Unit Tests" */;
+			buildPhases = (
+				21866C291BDE0DCC00B7653C /* Sources */,
+				21866C2A1BDE0DCC00B7653C /* Frameworks */,
+				21866C2B1BDE0DCC00B7653C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21866C331BDE0DCC00B7653C /* PBXTargetDependency */,
+			);
+			name = "BleuChat Unit Tests";
+			productName = "BleuChat Unit Tests";
+			productReference = 21866C2D1BDE0DCC00B7653C /* BleuChat Unit Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		21866C3A1BDE0E0300B7653C /* BleuChat UI Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21866C421BDE0E0300B7653C /* Build configuration list for PBXNativeTarget "BleuChat UI Tests" */;
+			buildPhases = (
+				21866C371BDE0E0300B7653C /* Sources */,
+				21866C381BDE0E0300B7653C /* Frameworks */,
+				21866C391BDE0E0300B7653C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21866C411BDE0E0300B7653C /* PBXTargetDependency */,
+			);
+			name = "BleuChat UI Tests";
+			productName = "BleuChat UI Tests";
+			productReference = 21866C3B1BDE0E0300B7653C /* BleuChat UI Tests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		3879F06FEBCFF2CA3041B91B /* BleuChat */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8230A21485937660EFED8D69 /* Build configuration list for PBXNativeTarget "BleuChat" */;
@@ -254,27 +292,6 @@
 			productReference = DCA74BE4E64A96B423827583 /* BleuChat.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4EC03EF39A8B6D51BCE3801D /* BleuChat Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 33F38704C070A60D25C7E06B /* Build configuration list for PBXNativeTarget "BleuChat Tests" */;
-			buildPhases = (
-				C337A9C6BF834039F7332CEF /* Check Pods Manifest.lock */,
-				211D377DFABE430C00A53F8F /* Sources */,
-				8BA9E410DBB6557BBBDFB91C /* Frameworks */,
-				A9947E1DEFEDDC90C3DF1A70 /* Resources */,
-				D3120672C647A953D13FAB1B /* Embed Pods Frameworks */,
-				BEE5236BCF42C11B92A08FAC /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B0087C3D05722D9E0468B0A1 /* PBXTargetDependency */,
-			);
-			name = "BleuChat Tests";
-			productName = "BleuChat Tests";
-			productReference = 4999B8152B0146EBF3607665 /* BleuChat Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -286,6 +303,14 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Kevin Xu";
 				TargetAttributes = {
+					21866C2C1BDE0DCC00B7653C = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 3879F06FEBCFF2CA3041B91B;
+					};
+					21866C3A1BDE0E0300B7653C = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 3879F06FEBCFF2CA3041B91B;
+					};
 					3879F06FEBCFF2CA3041B91B = {
 						DevelopmentTeam = ND6T35QN73;
 					};
@@ -304,13 +329,21 @@
 			projectRoot = "";
 			targets = (
 				3879F06FEBCFF2CA3041B91B /* BleuChat */,
-				4EC03EF39A8B6D51BCE3801D /* BleuChat Tests */,
+				21866C3A1BDE0E0300B7653C /* BleuChat UI Tests */,
+				21866C2C1BDE0DCC00B7653C /* BleuChat Unit Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A9947E1DEFEDDC90C3DF1A70 /* Resources */ = {
+		21866C2B1BDE0DCC00B7653C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21866C391BDE0E0300B7653C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -415,58 +448,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BEE5236BCF42C11B92A08FAC /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C337A9C6BF834039F7332CEF /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		D3120672C647A953D13FAB1B /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		211D377DFABE430C00A53F8F /* Sources */ = {
+		21866C291BDE0DCC00B7653C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21866C301BDE0DCC00B7653C /* BCMainUnitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21866C371BDE0E0300B7653C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21866C3E1BDE0E0300B7653C /* BCMainUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,14 +479,119 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B0087C3D05722D9E0468B0A1 /* PBXTargetDependency */ = {
+		21866C331BDE0DCC00B7653C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3879F06FEBCFF2CA3041B91B /* BleuChat */;
-			targetProxy = 221805B11CBB955062DAE365 /* PBXContainerItemProxy */;
+			targetProxy = 21866C321BDE0DCC00B7653C /* PBXContainerItemProxy */;
+		};
+		21866C411BDE0E0300B7653C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3879F06FEBCFF2CA3041B91B /* BleuChat */;
+			targetProxy = 21866C401BDE0E0300B7653C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		21866C341BDE0DCC00B7653C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3A84AB5871C56B4B3AAF9B2 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "BleuChat Unit Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imkevinxu.BleuChat-Unit-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BleuChat.app/BleuChat";
+			};
+			name = Debug;
+		};
+		21866C351BDE0DCC00B7653C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4850CA3ED004566C4D19E393 /* Pods.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "BleuChat Unit Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imkevinxu.BleuChat-Unit-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BleuChat.app/BleuChat";
+			};
+			name = Release;
+		};
+		21866C431BDE0E0300B7653C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3A84AB5871C56B4B3AAF9B2 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "BleuChat UI Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imkevinxu.BleuChat-UI-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_TARGET_NAME = BleuChat;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		21866C441BDE0E0300B7653C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4850CA3ED004566C4D19E393 /* Pods.release.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "BleuChat UI Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imkevinxu.BleuChat-UI-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = BleuChat;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 		57333D9812E8B5C0262A5AE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F3A84AB5871C56B4B3AAF9B2 /* Pods.debug.xcconfig */;
@@ -604,46 +706,6 @@
 			};
 			name = Debug;
 		};
-		DE93B37AB85959C9AE19A2C1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3A84AB5871C56B4B3AAF9B2 /* Pods.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BleuChat.app/BleuChat";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				INFOPLIST_FILE = "BleuChat Tests/Resources/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.imkevinxu.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		F0AC2DDB2800700B909F6B96 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4850CA3ED004566C4D19E393 /* Pods.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BleuChat.app/BleuChat";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				INFOPLIST_FILE = "BleuChat Tests/Resources/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.imkevinxu.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 		F7655F3377265FCA5C04804F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -695,11 +757,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		33F38704C070A60D25C7E06B /* Build configuration list for PBXNativeTarget "BleuChat Tests" */ = {
+		21866C361BDE0DCD00B7653C /* Build configuration list for PBXNativeTarget "BleuChat Unit Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F0AC2DDB2800700B909F6B96 /* Release */,
-				DE93B37AB85959C9AE19A2C1 /* Debug */,
+				21866C341BDE0DCC00B7653C /* Debug */,
+				21866C351BDE0DCC00B7653C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21866C421BDE0E0300B7653C /* Build configuration list for PBXNativeTarget "BleuChat UI Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21866C431BDE0E0300B7653C /* Debug */,
+				21866C441BDE0E0300B7653C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

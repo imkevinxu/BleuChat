@@ -9,7 +9,7 @@ use_frameworks!
 
 xcodeproj 'BleuChat'
 workspace 'BleuChat'
-link_with 'BleuChat', 'BleuChat Tests'
+link_with 'BleuChat', 'BleuChat UI Tests', 'BleuChat Unit Tests'
 
 # A fast & simple, yet powerful & flexible logging framework
 # https://github.com/CocoaLumberjack/CocoaLumberjack

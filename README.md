@@ -8,16 +8,14 @@ BleuChat is a Bluetooth Low Energy (BLE) powered chatting app.
 Setup
 -----
 
-Run `bin/setup`
-
-This will install the gem and pod dependencies.
+Run `bin/setup` to install the Gem and Pod dependencies.
 
 Development
 -----------
 
-Open `BleuChat.xcworkspace` to get started.
+Open `BleuChat.xcworkspace` to start developing.
 
 Testing
 -------
 
-Press `⌘+U` to run unit tests.
+Press `⌘+U` to run UI and Unit tests.
