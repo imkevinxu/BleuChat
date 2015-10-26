@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B7ECA1CAAA9519B3238B3DD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8106AA41FDC38D91A4DCD3A0 /* Settings.bundle */; };
 		165496758F1AD920D6C35240 /* libPods-unit_tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1D7F89A937C4EA13CE71 /* libPods-unit_tests.a */; };
+		1FF73AFCED591AA2AC8938A5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106A0299BA7AEB072EDE4839 /* Pods.framework */; };
 		259E2F634BCF97FD8FAE38B1 /* LaunchScreen.xib in Sources */ = {isa = PBXBuildFile; fileRef = C0187506B3B55080D093EAFA /* LaunchScreen.xib */; };
 		698E1ABE2A4BC8B9A68284CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796F8DB390C5B78EB986C4F5 /* AppDelegate.swift */; };
+		746C4D15103D9A893529E19E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106A0299BA7AEB072EDE4839 /* Pods.framework */; };
 		8D7B6A061EBA857E4562B58A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2EE17BF5A7C95A57D3A9D6F /* Images.xcassets */; };
-		AEC041F55EBEFE6A8646B2A3 /* Main.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = A65EC78F039804DE75C93869 /* Main.storyboard */; };
 		BF14094B3B3D6712C28A4816 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4E3B1AE1B61D7A2B701930 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,19 +27,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		106A0299BA7AEB072EDE4839 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4850CA3ED004566C4D19E393 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4999B8152B0146EBF3607665 /* BleuChat Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BleuChat Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A5030460F664BDA0CF52AF1 /* BleuChat Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BleuChat Tests-Info.plist"; sourceTree = "<group>"; };
-		62944328BA49CA66E0186D38 /* Pods-unit_tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unit_tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-unit_tests/Pods-unit_tests.release.xcconfig"; sourceTree = "<group>"; };
+		4A5030460F664BDA0CF52AF1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		796F8DB390C5B78EB986C4F5 /* AppDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8106AA41FDC38D91A4DCD3A0 /* Settings.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		A65EC78F039804DE75C93869 /* Main.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AD4E3B1AE1B61D7A2B701930 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		B2EE17BF5A7C95A57D3A9D6F /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C0187506B3B55080D093EAFA /* LaunchScreen.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		DC0E1D7F89A937C4EA13CE71 /* libPods-unit_tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-unit_tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA74BE4E64A96B423827583 /* BleuChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BleuChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1BACDF9AEA9EC0CFFAE137B /* Pods-unit_tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unit_tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-unit_tests/Pods-unit_tests.debug.xcconfig"; sourceTree = "<group>"; };
 		F017CC5BDEE17240A999AE06 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3A84AB5871C56B4B3AAF9B2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +47,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				165496758F1AD920D6C35240 /* libPods-unit_tests.a in Frameworks */,
+				1FF73AFCED591AA2AC8938A5 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +56,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF14094B3B3D6712C28A4816 /* Foundation.framework in Frameworks */,
+				746C4D15103D9A893529E19E /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,8 +98,8 @@
 		176DCE07744978632875ABD1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				62944328BA49CA66E0186D38 /* Pods-unit_tests.release.xcconfig */,
-				E1BACDF9AEA9EC0CFFAE137B /* Pods-unit_tests.debug.xcconfig */,
+				4850CA3ED004566C4D19E393 /* Pods.release.xcconfig */,
+				F3A84AB5871C56B4B3AAF9B2 /* Pods.debug.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -107,10 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				B2EE17BF5A7C95A57D3A9D6F /* Images.xcassets */,
-				E9B378E1385ED0ED31EACBF9 /* Storyboards */,
 				09F7D74DC3DBA8E51DFCBB29 /* Nibs */,
 				BD753EE41A9408EA177363B9 /* Other-Sources */,
-				8106AA41FDC38D91A4DCD3A0 /* Settings.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -158,6 +157,7 @@
 			children = (
 				0CC0FF07470B53BD42D2DFE8 /* iOS */,
 				DC0E1D7F89A937C4EA13CE71 /* libPods-unit_tests.a */,
+				106A0299BA7AEB072EDE4839 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -172,7 +172,7 @@
 		9CCC4ACDB803F266F5CC31F2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4A5030460F664BDA0CF52AF1 /* BleuChat Tests-Info.plist */,
+				4A5030460F664BDA0CF52AF1 /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -228,14 +228,6 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		E9B378E1385ED0ED31EACBF9 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				A65EC78F039804DE75C93869 /* Main.storyboard */,
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -243,11 +235,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8230A21485937660EFED8D69 /* Build configuration list for PBXNativeTarget "BleuChat" */;
 			buildPhases = (
+				2C62A477675CAFEC857053B8 /* Check Pods Manifest.lock */,
 				EC50743CAC3CC8D21A38EE22 /* Sources */,
 				8F93578E58861BE13B0076A9 /* Frameworks */,
 				B55F865C8B5C514314A3FCE4 /* Resources */,
 				493CEAB1D24CF355D0D409BC /* Warn for TODO and FIXME comments */,
 				7F2EBC2A0B9EF76C8DDB35E0 /* Set version number */,
+				0DB3952FCF2D9371FF90BCB6 /* Embed Pods Frameworks */,
+				894D896AAA71D527D00C6A71 /* Copy Pods Resources */,
+				21A3E7F41BDDF5F9001FA69B /* Increment Build Number */,
 			);
 			buildRules = (
 			);
@@ -286,8 +282,14 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = BC;
-				LastUpgradeCheck = 0510;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Kevin Xu";
+				TargetAttributes = {
+					3879F06FEBCFF2CA3041B91B = {
+						DevelopmentTeam = ND6T35QN73;
+					};
+				};
 			};
 			buildConfigurationList = F4E77667C2D81F085FED234E /* Build configuration list for PBXProject "BleuChat" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -320,13 +322,56 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D7B6A061EBA857E4562B58A /* Images.xcassets in Resources */,
-				0B7ECA1CAAA9519B3238B3DD /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0DB3952FCF2D9371FF90BCB6 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		21A3E7F41BDDF5F9001FA69B /* Increment Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Increment Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -z \"${PROJECT_DIR}\" ]; then\n    PROJECT_DIR=`pwd`\nfi\n\nif [ -z \"${PREFIX}\" ]; then\n    PREFIX=\"\"\nfi\n\nSVN_DIR=\"${PROJECT_DIR}/.svn\"\nGIT_DIR=\"${PROJECT_DIR}/.git\"\n\nif [ -d \"${GIT_DIR}\" ]; then\n    if [ -z \"${GIT_BRANCH}\" ]; then\n        GIT_BRANCH=`git rev-parse --abbrev-ref HEAD`\n    fi\n\n    BUILD_NUMBER=`xcrun git rev-list ${GIT_BRANCH} | wc -l | tr -d ' '`\n    BUILD_HASH=`xcrun git rev-parse --short --verify ${GIT_BRANCH} | tr -d ' '`\nelif [ -d \"${SVN_DIR}\" ]; then\n    BUILD_NUMBER=`xcrun svnversion -nc \"${PROJECT_DIR}\" | sed -e 's/^[^:]*://;s/[A-Za-z]//' | tr -d ' '`\n    BUILD_HASH=\"${BUILD_NUMBER}\"\nelse\n    BUILD_NUMBER=\"1\"\n    BUILD_HASH=\"1\"\nfi\n\nOLD_BUILD_NUMBER=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\n\nif [ \"${BUILD_NUMBER}\" != \"${OLD_BUILD_NUMBER}\" ]; then\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BUILD_NUMBER\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\nfi";
+		};
+		2C62A477675CAFEC857053B8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		493CEAB1D24CF355D0D409BC /* Warn for TODO and FIXME comments */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -355,6 +400,21 @@
 			shellPath = /bin/sh;
 			shellScript = "git=$(sh /etc/profile; which git)\ngit_release_version=$(\"$git\" describe --tags --always --abbrev=0)\nnumber_of_commits=$(\"$git\" rev-list master | wc -l | tr -d ' ')\ntarget_plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\ndsym_plist=\"$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist\"\n\nfor plist in \"$target_plist\" \"$dsym_plist\"; do\n  if [ -f \"$plist\" ]; then\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $number_of_commits\" \"$plist\"\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${git_release_version#*v}\" \"$plist\"\n  fi\ndone\n";
 		};
+		894D896AAA71D527D00C6A71 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		BEE5236BCF42C11B92A08FAC /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -367,7 +427,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-unit_tests/Pods-unit_tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C337A9C6BF834039F7332CEF /* Check Pods Manifest.lock */ = {
@@ -397,7 +457,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-unit_tests/Pods-unit_tests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -415,7 +475,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				698E1ABE2A4BC8B9A68284CF /* AppDelegate.swift in Sources */,
-				AEC041F55EBEFE6A8646B2A3 /* Main.storyboard in Sources */,
 				259E2F634BCF97FD8FAE38B1 /* LaunchScreen.xib in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,8 +492,10 @@
 /* Begin XCBuildConfiguration section */
 		57333D9812E8B5C0262A5AE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3A84AB5871C56B4B3AAF9B2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -447,23 +508,29 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "BleuChat/Resources/Other-Sources/Info.plist";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imkevinxu.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		758F57AF45FC8B38D27DBD6D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4850CA3ED004566C4D19E393 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "BleuChat/Resources/Other-Sources/Info.plist";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = (
 					"-DNS_BLOCK_ASSERTIONS=1",
@@ -473,9 +540,11 @@
 					"-DNS_BLOCK_ASSERTIONS=1",
 					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imkevinxu.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -502,6 +571,7 @@
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -527,7 +597,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
@@ -536,7 +606,7 @@
 		};
 		DE93B37AB85959C9AE19A2C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1BACDF9AEA9EC0CFFAE137B /* Pods-unit_tests.debug.xcconfig */;
+			baseConfigurationReference = F3A84AB5871C56B4B3AAF9B2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BleuChat.app/BleuChat";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -544,7 +614,8 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
-				INFOPLIST_FILE = "BleuChat Tests/Resources/BleuChat Tests-Info.plist";
+				INFOPLIST_FILE = "BleuChat Tests/Resources/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imkevinxu.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -555,7 +626,7 @@
 		};
 		F0AC2DDB2800700B909F6B96 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62944328BA49CA66E0186D38 /* Pods-unit_tests.release.xcconfig */;
+			baseConfigurationReference = 4850CA3ED004566C4D19E393 /* Pods.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BleuChat.app/BleuChat";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -563,7 +634,8 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
-				INFOPLIST_FILE = "BleuChat Tests/Resources/BleuChat Tests-Info.plist";
+				INFOPLIST_FILE = "BleuChat Tests/Resources/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imkevinxu.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -613,7 +685,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

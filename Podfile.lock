@@ -1,31 +1,19 @@
 PODS:
-  - Expecta (1.0.3)
-  - OCMock (3.2)
-  - OHHTTPStubs (4.4.0):
-    - OHHTTPStubs/Default (= 4.4.0)
-  - OHHTTPStubs/Core (4.4.0)
-  - OHHTTPStubs/Default (4.4.0):
-    - OHHTTPStubs/Core
-    - OHHTTPStubs/JSON
-    - OHHTTPStubs/NSURLSession
-    - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (4.4.0):
-    - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (4.4.0):
-    - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (4.4.0)
-  - Specta (1.0.4)
+  - CocoaLumberjack/Core (2.1.0)
+  - CocoaLumberjack/Default (2.1.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.1.0):
+    - CocoaLumberjack/Default
+  - CocoaLumberjack/Swift (2.1.0):
+    - CocoaLumberjack/Extensions
+  - SnapKit (0.15.0)
 
 DEPENDENCIES:
-  - Expecta
-  - OCMock
-  - OHHTTPStubs
-  - Specta
+  - CocoaLumberjack/Swift (~> 2.0)
+  - SnapKit (~> 0.15)
 
 SPEC CHECKSUMS:
-  Expecta: 9d1bff6c8b0eeee73a166a2ee898892478927a15
-  OCMock: 28def049ef47f996b515a8eeea958be7ccab2dbb
-  OHHTTPStubs: 1a95a653b78287a1fdb44eb38364b43257ac3550
-  Specta: 69bb134672aae190a1379ff91df07dad8dd1f869
+  CocoaLumberjack: d6627e7ad42e14d41a4fa2e6c7ae42489d5f3e8b
+  SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
 
 COCOAPODS: 0.39.0

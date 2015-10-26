@@ -1,19 +1,23 @@
-# BleuChat #
+BleuChat iOS Codebase
+=====================
 
-## Setup ##
+![Version 1.0](http://img.shields.io/badge/Version-1.0-brightgreen.svg) ![iOS 9.0+](http://img.shields.io/badge/iOS-9.0+-blue.svg) ![Swift 2.1](http://img.shields.io/badge/Swift-2.1-orange.svg) ![CocoaPods 0.39.0](http://img.shields.io/badge/CocoaPods-0.39.0-red.svg) ![Platform Universal](http://img.shields.io/badge/Platform-Universal-lightgrey.svg)
+
+BleuChat is a Bluetooth Low Energy (BLE) powered chatting app.
+
+Setup
+-----
 
 Run `bin/setup`
 
-This will:
+This will install the gem and pod dependencies.
 
- - Install the gem dependencies
- - Install the pod dependencies
+Development
+-----------
 
-## Testing ##
+Open `BleuChat.xcworkspace` to get started.
 
-Run `bin/test`
+Testing
+-------
 
-This will run the tests from the command line, and pipe the result through
-[XCPretty][].
-
-[XCPretty]: https://github.com/supermarin/xcpretty
+Press `⌘+U` to run unit tests.

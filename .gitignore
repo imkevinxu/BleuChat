@@ -1,32 +1,77 @@
-# OS X Finder
-.DS_Store
+# Cocoapods
+Pods/
 
-# Xcode per-user config
+# Gemfile
+/.bundle
+/vendor/
+
+# Xcode
+build/
 *.mode1
+!default.mode1
 *.mode1v3
+!default.mode1v3
 *.mode2v3
+!default.mode2v3
 *.perspective
+!default.perspective
 *.perspectivev3
+!default.perspectivev3
 *.pbxuser
+!default.pbxuser
 xcuserdata
 *.xccheckout
-
-# Build products
-build/
-*.o
-*.LinkFileList
+*.xcuserstate
+*.moved-aside
+DerivedData
+*.ipa
 *.hmap
-
-# Automatic backup files
 *~.nib/
-*.swp
-*~
 *.dat
 *.dep
+*.LinkFileList
 
-# Cocoapods
-Pods
+# Text editors
+.svn
+*~
+*.sw
+*.swp
+*.tmproj
+*.sublime-project
+*.sublime-workspace
 
-# AppCode specific files
-.idea/
-*.iml
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases
+*.db
+*.rdb
+*.log
+*.log.*
+*.sql
+*.sqlite
+
+# OS generated files
+.DS_Store
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
