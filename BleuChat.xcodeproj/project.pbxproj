@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		21866C301BDE0DCC00B7653C /* BCMainUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21866C2F1BDE0DCC00B7653C /* BCMainUnitTests.swift */; };
 		21866C3E1BDE0E0300B7653C /* BCMainUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21866C3D1BDE0E0300B7653C /* BCMainUITests.swift */; };
-		259E2F634BCF97FD8FAE38B1 /* LaunchScreen.xib in Sources */ = {isa = PBXBuildFile; fileRef = C0187506B3B55080D093EAFA /* LaunchScreen.xib */; };
-		698E1ABE2A4BC8B9A68284CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796F8DB390C5B78EB986C4F5 /* AppDelegate.swift */; };
+		21C1EACA1BDE1985008A482E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21C1EAC81BDE1985008A482E /* LaunchScreen.xib */; };
+		21C1EACE1BDE19EA008A482E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C1EACD1BDE19EA008A482E /* AppDelegate.swift */; };
+		21C1EAD21BDE1CA8008A482E /* BCMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C1EAD11BDE1CA8008A482E /* BCMainViewController.swift */; };
 		746C4D15103D9A893529E19E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106A0299BA7AEB072EDE4839 /* Pods.framework */; };
 		8D7B6A061EBA857E4562B58A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2EE17BF5A7C95A57D3A9D6F /* Images.xcassets */; };
 		BF14094B3B3D6712C28A4816 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4E3B1AE1B61D7A2B701930 /* Foundation.framework */; };
@@ -41,13 +42,15 @@
 		21866C3B1BDE0E0300B7653C /* BleuChat UI Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BleuChat UI Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21866C3D1BDE0E0300B7653C /* BCMainUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCMainUITests.swift; sourceTree = "<group>"; };
 		21866C3F1BDE0E0300B7653C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21C1EAC71BDE1985008A482E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21C1EAC81BDE1985008A482E /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		21C1EACD1BDE19EA008A482E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Application/AppDelegate.swift; sourceTree = "<group>"; };
+		21C1EACF1BDE1A22008A482E /* BleuChat-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BleuChat-Bridging-Header.h"; path = "Application/BleuChat-Bridging-Header.h"; sourceTree = "<group>"; };
+		21C1EAD11BDE1CA8008A482E /* BCMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCMainViewController.swift; sourceTree = "<group>"; };
 		4850CA3ED004566C4D19E393 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		796F8DB390C5B78EB986C4F5 /* AppDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD4E3B1AE1B61D7A2B701930 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		B2EE17BF5A7C95A57D3A9D6F /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		C0187506B3B55080D093EAFA /* LaunchScreen.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		DCA74BE4E64A96B423827583 /* BleuChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BleuChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F017CC5BDEE17240A999AE06 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3A84AB5871C56B4B3AAF9B2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,14 +89,6 @@
 				21866C3B1BDE0E0300B7653C /* BleuChat UI Tests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		09F7D74DC3DBA8E51DFCBB29 /* Nibs */ = {
-			isa = PBXGroup;
-			children = (
-				C0187506B3B55080D093EAFA /* LaunchScreen.xib */,
-			);
-			path = Nibs;
 			sourceTree = "<group>";
 		};
 		0CC0FF07470B53BD42D2DFE8 /* iOS */ = {
@@ -138,12 +133,28 @@
 			path = "BleuChat UI Tests";
 			sourceTree = "<group>";
 		};
+		21C1EACB1BDE19C8008A482E /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				21C1EACD1BDE19EA008A482E /* AppDelegate.swift */,
+				21C1EACF1BDE1A22008A482E /* BleuChat-Bridging-Header.h */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		21C1EAD01BDE1AF9008A482E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		3C65F3997264114281DA7293 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				B2EE17BF5A7C95A57D3A9D6F /* Images.xcassets */,
-				09F7D74DC3DBA8E51DFCBB29 /* Nibs */,
-				BD753EE41A9408EA177363B9 /* Other-Sources */,
+				21C1EAC81BDE1985008A482E /* LaunchScreen.xib */,
+				21C1EAC71BDE1985008A482E /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -158,8 +169,10 @@
 		84DA4B6582327944F5D46BB4 /* BleuChat */ = {
 			isa = PBXGroup;
 			children = (
+				21C1EACB1BDE19C8008A482E /* Application */,
 				175782B9E8DFDF2992B601F1 /* Extensions */,
 				DC70790DB5B49C70E3CCC979 /* Protocols */,
+				21C1EAD01BDE1AF9008A482E /* Helpers */,
 				D725293D87C9F5A5E47757A2 /* Models */,
 				4E34075284320A9C1B35F618 /* ViewModels */,
 				BC774B2C31454577941C8530 /* Controllers */,
@@ -196,17 +209,9 @@
 		BC774B2C31454577941C8530 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				796F8DB390C5B78EB986C4F5 /* AppDelegate.swift */,
+				21C1EAD11BDE1CA8008A482E /* BCMainViewController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		BD753EE41A9408EA177363B9 /* Other-Sources */ = {
-			isa = PBXGroup;
-			children = (
-				F017CC5BDEE17240A999AE06 /* Info.plist */,
-			);
-			path = "Other-Sources";
 			sourceTree = "<group>";
 		};
 		D511965AF58DF8C2D0DAE83B /* Views */ = {
@@ -354,6 +359,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21C1EACA1BDE1985008A482E /* LaunchScreen.xib in Resources */,
 				8D7B6A061EBA857E4562B58A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,8 +477,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				698E1ABE2A4BC8B9A68284CF /* AppDelegate.swift in Sources */,
-				259E2F634BCF97FD8FAE38B1 /* LaunchScreen.xib in Sources */,
+				21C1EAD21BDE1CA8008A482E /* BCMainViewController.swift in Sources */,
+				21C1EACE1BDE19EA008A482E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,6 +603,7 @@
 			baseConfigurationReference = F3A84AB5871C56B4B3AAF9B2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
@@ -608,7 +615,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INFOPLIST_FILE = "BleuChat/Resources/Other-Sources/Info.plist";
+				INFOPLIST_FILE = BleuChat/Resources/Info.plist;
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -616,6 +623,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "BleuChat/Application/BleuChat-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -625,12 +634,13 @@
 			baseConfigurationReference = 4850CA3ED004566C4D19E393 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = "BleuChat/Resources/Other-Sources/Info.plist";
+				INFOPLIST_FILE = BleuChat/Resources/Info.plist;
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -646,6 +656,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "BleuChat/Application/BleuChat-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
