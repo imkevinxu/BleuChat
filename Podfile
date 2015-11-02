@@ -18,3 +18,7 @@ pod 'CocoaLumberjack/Swift', '~> 2.0'
 # Autolayout DSL for iOS
 # https://github.com/SnapKit/SnapKit
 pod 'SnapKit', '~> 0.15'
+
+# Detects the current device info at runtime
+# https://github.com/lmirosevic/GBDeviceInfo
+pod 'GBDeviceInfo', '~> 3.6'

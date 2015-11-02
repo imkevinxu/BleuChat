@@ -6,14 +6,19 @@ PODS:
     - CocoaLumberjack/Default
   - CocoaLumberjack/Swift (2.1.0):
     - CocoaLumberjack/Extensions
+  - GBDeviceInfo (3.6.0):
+    - GBDeviceInfo/Core (= 3.6.0)
+  - GBDeviceInfo/Core (3.6.0)
   - SnapKit (0.15.0)
 
 DEPENDENCIES:
   - CocoaLumberjack/Swift (~> 2.0)
+  - GBDeviceInfo (~> 3.6)
   - SnapKit (~> 0.15)
 
 SPEC CHECKSUMS:
   CocoaLumberjack: d6627e7ad42e14d41a4fa2e6c7ae42489d5f3e8b
+  GBDeviceInfo: 9f00de7d81a99204c3eb2a8aed660129fe3a82f7
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
 
 COCOAPODS: 0.39.0
