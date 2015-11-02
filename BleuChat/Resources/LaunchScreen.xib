@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,10 +14,29 @@
                     <rect key="frame" x="160" y="160" width="160" height="160"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="qXG-co-qH7" secondAttribute="height" multiplier="1:1" id="HhO-Ox-Q7V"/>
-                        <constraint firstAttribute="height" constant="160" id="nmK-b9-H2y"/>
-                        <constraint firstAttribute="width" constant="160" id="pEQ-ks-NDR"/>
+                        <constraint firstAttribute="width" constant="160" id="De6-EJ-hXe"/>
+                        <constraint firstAttribute="height" constant="160" id="eHJ-7j-L5m"/>
+                        <constraint firstAttribute="height" constant="120" id="nmK-b9-H2y"/>
+                        <constraint firstAttribute="width" constant="120" id="pEQ-ks-NDR"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="nmK-b9-H2y"/>
+                            <exclude reference="pEQ-ks-NDR"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="nmK-b9-H2y"/>
+                            <include reference="pEQ-ks-NDR"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="De6-EJ-hXe"/>
+                            <include reference="eHJ-7j-L5m"/>
+                        </mask>
+                    </variation>
                 </imageView>
             </subviews>
             <animations/>
