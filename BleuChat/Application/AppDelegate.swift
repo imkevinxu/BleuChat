@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import CocoaLumberjack
 
 // MARK: - Properties
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+
     var window: UIWindow?
 }
 
@@ -21,19 +22,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        
+
         setupApplication()
+        configureApplication()
         return true
     }
-    
-    // MARK: Setup Methods
-    
-    private func setupApplication() {
+}
 
+// MARK: - Setup Methods
+
+extension AppDelegate {
+
+    private func setupApplication() {
+        setupRootViewController()
+    }
+
+    private func setupRootViewController() {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         if let window = window {
             window.rootViewController = BCMainViewController()
             window.makeKeyAndVisible()
         }
+    }
+}
+
+// MARK: - Configuration Methods
+
+extension AppDelegate {
+
+    private func configureApplication() {
+        configureLogger()
+        logAppInformation()
+    }
+
+    private func configureLogger() {
+        let sharedLogger = DDTTYLogger.sharedInstance()
+        sharedLogger.logFormatter = BCLogFormatter()
+        DDLog.addLogger(sharedLogger)
+    }
+
+    private func logAppInformation() {
+        DDLogDebug("BleuChat Version \(UIApplication.APP_VERSION) (Build \(UIApplication.APP_BUILD))")
+        DDLogDebug("\(Device.CURRENT_DEVICE) \(Device.SIMULATOR_OR_DEVICE) (iOS \(Device.CURRENT_VERSION))")
+        DDLogInfo("App Successfully Launched (\(Device.CONFIGURATION) Mode)")
     }
 }

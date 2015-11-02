@@ -16,6 +16,7 @@ struct Device {
     static let TheCurrentDevice = UIDevice.currentDevice()
     static let TheCurrentVersion = (UIDevice.currentDevice().systemVersion as NSString).floatValue
     static let TheCurrentHeight = UIScreen.mainScreen().bounds.size.height
+    static let TheCurrentOrientation = UIApplication.sharedApplication().statusBarOrientation
 }
 
 // MARK: - Device Idiom Checks
@@ -53,6 +54,18 @@ extension Device {
 
     static func isRelease() -> Bool {
         return CONFIGURATION == "Release"
+    }
+
+    static func isPortrait() -> Bool {
+        return TheCurrentOrientation == .Portrait
+    }
+
+    static func isLandscape() -> Bool {
+        return TheCurrentOrientation == .LandscapeLeft || TheCurrentOrientation == .LandscapeRight
+    }
+
+    static func isUpsideDown() -> Bool {
+        return TheCurrentOrientation == .PortraitUpsideDown
     }
 
     // MARK: Helper Methods
