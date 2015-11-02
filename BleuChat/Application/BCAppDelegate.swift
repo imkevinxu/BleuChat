@@ -1,5 +1,5 @@
 //
-//  AppDelegate.swift
+//  BCAppDelegate.swift
 //  BleuChat
 //
 //  Created by Kevin Xu on 10/25/15
@@ -12,14 +12,14 @@ import CocoaLumberjack
 // MARK: - Properties
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class BCAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 }
 
 // MARK: - Application Lifecycle
 
-extension AppDelegate {
+extension BCAppDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
 
@@ -31,7 +31,7 @@ extension AppDelegate {
 
 // MARK: - Setup Methods
 
-extension AppDelegate {
+extension BCAppDelegate {
 
     private func setupApplication() {
         setupRootViewController()
@@ -40,7 +40,8 @@ extension AppDelegate {
     private func setupRootViewController() {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         if let window = window {
-            window.rootViewController = BCMainViewController()
+            window.rootViewController = UINavigationController(rootViewController: BCChatViewController())
+            window.backgroundColor = UIColor.whiteColor()
             window.makeKeyAndVisible()
         }
     }
@@ -48,7 +49,7 @@ extension AppDelegate {
 
 // MARK: - Configuration Methods
 
-extension AppDelegate {
+extension BCAppDelegate {
 
     private func configureApplication() {
         configureLogger()
