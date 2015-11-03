@@ -16,6 +16,7 @@ final class BCPeripheralManager: NSObject {
 
     var peripheralManager: CBPeripheralManager!
     var transferCharacteristic: CBMutableCharacteristic!
+    var transportManager: BCTransportManager!
     var sendingData: NSData = NSData()
     var sendingDataIndex: Int = 0
     var sendingEOM: Bool = false
@@ -26,6 +27,7 @@ final class BCPeripheralManager: NSObject {
         super.init()
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
         transferCharacteristic = CBMutableCharacteristic(type: CHARACTERISTIC_CHAT_UUID, properties: .Notify, value: nil, permissions: .Readable)
+        transportManager = BCTransportManager()
     }
 }
 
@@ -62,12 +64,7 @@ extension BCPeripheralManager {
             "message": message,
             "name": name
         ])
-
-        DDLogInfo("Peripheral sending message: \(message)")
-
-        let messageObject = BCMessage(message: message, name: name, isSelf: true)
-        BCDefaults.appendDataObjectToArray(messageObject, forKey: .Messages)
-
+        transportManager.sendMessage(message, name: name)
         sendData()
     }
 }

@@ -17,6 +17,7 @@ final class BCCentralManager: NSObject {
     var centralManager: CBCentralManager!
     var discoveredPeripherals: [CBPeripheral]!
     var dataStorage: [NSUUID: NSMutableData]!
+    var transportManager: BCTransportManager!
 
     // MARK: Initializer
 
@@ -25,6 +26,7 @@ final class BCCentralManager: NSObject {
         centralManager = CBCentralManager(delegate: self, queue: nil, options: nil)
         discoveredPeripherals = []
         dataStorage = [:]
+        transportManager = BCTransportManager()
     }
 }
 
@@ -200,22 +202,12 @@ extension BCCentralManager: CBPeripheralDelegate {
                 return
             }
 
-            if let dataString = String(data: data, encoding: NSUTF8StringEncoding) where dataString == "EOM" {
-                if let dataStore = dataStorage[peripheral.identifier],
-                       dataDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(dataStore),
-                       message = dataDictionary["message"],
-                       name = dataDictionary["name"] {
+            if let dataString = String(data: data, encoding: NSUTF8StringEncoding),
+                   dataStore = dataStorage[peripheral.identifier]
+               where dataString == "EOM" {
+                transportManager.receivedMessage(dataStore)
+                dataStorage[peripheral.identifier] = NSMutableData()
 
-                    // Parse info from dictionary sent over
-                    let message = message as! String
-                    let name = name as! String
-                    DDLogInfo("Central received message \"\(message)\" from \"\(name)\" on \"\(BCTranslator.peripheralName(peripheral))\"")
-
-                    let messageObject = BCMessage(message: message, name: name)
-                    BCDefaults.appendDataObjectToArray(messageObject, forKey: .Messages)
-
-                    dataStorage[peripheral.identifier] = NSMutableData()
-                }
             } else {
 
                 // Append data chunks to local storage
