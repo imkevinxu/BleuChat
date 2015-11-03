@@ -40,7 +40,10 @@ extension BCAppDelegate {
     private func setupRootViewController() {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         if let window = window {
-            window.rootViewController = UINavigationController(rootViewController: BCChatViewController())
+            let chatViewController = BCChatViewController()
+            chatViewController.centralManager = BCCentralManager()
+            chatViewController.peripheralManager = BCPeripheralManager()
+            window.rootViewController = UINavigationController(rootViewController: chatViewController)
             window.backgroundColor = UIColor.whiteColor()
             window.makeKeyAndVisible()
         }
