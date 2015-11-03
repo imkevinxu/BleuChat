@@ -57,7 +57,7 @@ extension BCCentralManager {
             return
         }
 
-        DDLogInfo("Central cleaning up connections")
+        DDLogDebug("Central cleaning up connections")
         if let services = peripheral.services {
             for service in services {
                 if let characteristics = service.characteristics {
@@ -97,7 +97,7 @@ extension BCCentralManager: CBCentralManagerDelegate {
     }
 
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
-        DDLogInfo("Central discovered \"\(BCTranslator.peripheralName(peripheral))\" (State: \(BCTranslator.peripheralState(peripheral)), RSSI: \(RSSI))")
+        DDLogDebug("Central discovered \"\(BCTranslator.peripheralName(peripheral))\" (State: \(BCTranslator.peripheralState(peripheral)), RSSI: \(RSSI))")
 
         // Store newly discovered peripheral and connect to it
         if discoveredPeripherals.indexOf(peripheral) == nil {
@@ -163,7 +163,7 @@ extension BCCentralManager: CBPeripheralDelegate {
 
                 // Found desired characteristics on peripheral so subscribe to it
                 if characteristic.UUID == CHARACTERISTIC_CHAT_UUID {
-                    DDLogInfo("Central subscribed to \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
+                    DDLogDebug("Central subscribed to \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
                     peripheral.setNotifyValue(true, forCharacteristic: characteristic)
                 }
             }
@@ -179,9 +179,9 @@ extension BCCentralManager: CBPeripheralDelegate {
 
         if characteristic.UUID == CHARACTERISTIC_CHAT_UUID {
             if characteristic.isNotifying {
-                DDLogInfo("Central will be notified by \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
+                DDLogDebug("Central will be notified by \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
             } else {
-                DDLogInfo("Central stopped getting notified by \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\". Disconnecting")
+                DDLogDebug("Central stopped getting notified by \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\". Disconnecting")
                 centralManager.cancelPeripheralConnection(peripheral)
             }
         }
@@ -203,11 +203,13 @@ extension BCCentralManager: CBPeripheralDelegate {
             if let dataString = String(data: data, encoding: NSUTF8StringEncoding) where dataString == "EOM" {
                 if let dataStore = dataStorage[peripheral.identifier],
                        dataDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(dataStore),
+                       name = dataDictionary["name"],
                        message = dataDictionary["message"] {
 
                     // Parse info from dictionary sent over
-                    if let message = message {
-                        DDLogInfo("Central received message \"\(message)\" from \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
+                    if let name = name,
+                           message = message {
+                        DDLogInfo("Central received message \"\(message)\" from \"\(name)\" on \"\(BCTranslator.peripheralName(peripheral))\"")
 
                         // TODO: Do something with the whole message
                     }
@@ -223,7 +225,7 @@ extension BCCentralManager: CBPeripheralDelegate {
                 } else {
                     dataStorage[peripheral.identifier] = NSMutableData(data: data)
                 }
-                DDLogInfo("Central received chunk \"\(data)\" from \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
+                DDLogDebug("Central received chunk \"\(data)\" from \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
             }
         }
     }

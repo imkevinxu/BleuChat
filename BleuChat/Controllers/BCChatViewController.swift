@@ -58,7 +58,8 @@ extension BCChatViewController {
 extension BCChatViewController {
 
     func sendButtonTapped(sender: UIButton) {
-        peripheralManager.sendMessage("HELLO WAkls dfjsal;kfj sdakl;fj skal;dfj lawgroisjgvs;lijks;ekjtl4;kjygs5elkjye5jy3u502u4890u520358190u5joitjglskgjwoirgjsropigj4a9p8h92at894uithaow4ituhiesuhrlfzxjgkvklzfjgfdgkljfdkgjdlks h935 yt398u t924u9!")
+        BCDefaults.setObject("Kevin Xu", forKey: .Name)
+        peripheralManager.sendMessage("Hello World!")
     }
 
     func scanButtonTapped(sender: UIButton) {

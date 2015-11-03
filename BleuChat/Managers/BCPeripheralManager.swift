@@ -54,9 +54,16 @@ extension BCPeripheralManager {
     }
 
     func sendMessage(message: String) {
+        guard let name = BCDefaults.stringForKey(.Name) else {
+            UIApplication.presentAlert(title: "Name Not Set", message: "Please enter your name by clicking the information icon in the top right corner")
+            return
+        }
         sendingData = NSKeyedArchiver.archivedDataWithRootObject([
+            "name": name,
             "message": message
         ])
+
+        DDLogInfo"Peripheral sending message: \(message)")
 
         // TODO: Do something with the whole message
 
@@ -76,7 +83,7 @@ extension BCPeripheralManager {
             didSend = peripheralManager.updateValue(eomData, forCharacteristic: transferCharacteristic, onSubscribedCentrals: nil)
             if didSend {
                 sendingEOM = false
-                DDLogInfo("Peripheral sent: <EOM>")
+                DDLogDebug("Peripheral sent: <EOM>")
             }
             return
         }
@@ -97,7 +104,7 @@ extension BCPeripheralManager {
             if !didSend {
                 return
             }
-            DDLogInfo("Peripheral sent data: \"\(chunk)\"")
+            DDLogDebug("Peripheral sent data: \"\(chunk)\"")
 
             sendingDataIndex += amountToSend
             if sendingDataIndex >= sendingData.length {
@@ -106,7 +113,7 @@ extension BCPeripheralManager {
                 didSend = peripheralManager.updateValue(eomData, forCharacteristic: transferCharacteristic, onSubscribedCentrals: nil)
                 if didSend {
                     sendingEOM = false
-                    DDLogInfo("Peripheral sent: <EOM>")
+                    DDLogDebug("Peripheral sent: <EOM>")
                 }
                 return
             }
@@ -150,15 +157,15 @@ extension BCPeripheralManager: CBPeripheralManagerDelegate {
     }
 
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didSubscribeToCharacteristic characteristic: CBCharacteristic) {
-        DDLogInfo("Peripheral's \"\(BCTranslator.characteristicName(characteristic))\" has been subscribed to by a central")
+        DDLogDebug("Peripheral's \"\(BCTranslator.characteristicName(characteristic))\" has been subscribed to by a central")
     }
 
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFromCharacteristic characteristic: CBCharacteristic) {
-        DDLogInfo("Peripheral's \"\(BCTranslator.characteristicName(characteristic))\" has been unsubscribed to by a central")
+        DDLogDebug("Peripheral's \"\(BCTranslator.characteristicName(characteristic))\" has been unsubscribed to by a central")
     }
 
     func peripheralManagerIsReadyToUpdateSubscribers(peripheral: CBPeripheralManager) {
-        DDLogInfo("Peripheral is ready to send data")
+        DDLogDebug("Peripheral is ready to send data")
         sendData()
     }
 }
