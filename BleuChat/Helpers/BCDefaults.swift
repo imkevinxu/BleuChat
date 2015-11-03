@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Properties
 
-struct Defaults {
+struct BCDefaults {
 
     enum Keys: String {
         case Name = "com.bleuchat.Name"
@@ -23,7 +23,7 @@ struct Defaults {
 
 // MARK: - Methods
 
-extension Defaults {
+extension BCDefaults {
 
     // MARK: Get Methods
 

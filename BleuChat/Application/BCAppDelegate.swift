@@ -67,7 +67,7 @@ extension BCAppDelegate {
 
     private func logAppInformation() {
         DDLogDebug("BleuChat Version \(UIApplication.APP_VERSION) (Build \(UIApplication.APP_BUILD))")
-        DDLogDebug("\(Device.CURRENT_DEVICE) \(Device.SIMULATOR_OR_DEVICE) (iOS \(Device.CURRENT_VERSION))")
-        DDLogInfo("App Successfully Launched (\(Device.CONFIGURATION) Mode)")
+        DDLogDebug("\(BCDevice.CURRENT_DEVICE) \(BCDevice.SIMULATOR_OR_DEVICE) (iOS \(BCDevice.CURRENT_VERSION))")
+        DDLogInfo("App Successfully Launched (\(BCDevice.CONFIGURATION) Mode)")
     }
 }

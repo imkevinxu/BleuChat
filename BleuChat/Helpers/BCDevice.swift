@@ -11,7 +11,7 @@ import GBDeviceInfo
 
 // MARK: - Singletons
 
-struct Device {
+struct BCDevice {
 
     static let TheCurrentDevice = UIDevice.currentDevice()
     static let TheCurrentVersion = (UIDevice.currentDevice().systemVersion as NSString).floatValue
@@ -21,13 +21,13 @@ struct Device {
 
 // MARK: - Device Idiom Checks
 
-extension Device {
+extension BCDevice {
 
     // MARK: Constants
 
-    static let PHONE_OR_PAD = Device.phoneOrPad()
-    static let SIMULATOR_OR_DEVICE = Device.simulatorOrDevice()
-    static let CONFIGURATION = Device.configuration()
+    static let PHONE_OR_PAD = BCDevice.phoneOrPad()
+    static let SIMULATOR_OR_DEVICE = BCDevice.simulatorOrDevice()
+    static let CONFIGURATION = BCDevice.configuration()
     static let CURRENT_DEVICE = GBDeviceInfo.deviceInfo().modelString
 
     // MARK: Boolean Checks
@@ -98,7 +98,7 @@ extension Device {
 
 // MARK: - Device Version Checks
 
-extension Device {
+extension BCDevice {
 
     enum Versions: Float {
         case Five  = 5.0
@@ -195,7 +195,7 @@ extension Device {
 
 // MARK: - Device Size Checks
 
-extension Device {
+extension BCDevice {
 
     enum Heights: CGFloat {
         case Inches_3_5 = 480
@@ -216,7 +216,7 @@ extension Device {
         return TheCurrentHeight <= height.rawValue
     }
 
-    static let CURRENT_SIZE = Device.currentSize()
+    static let CURRENT_SIZE = BCDevice.currentSize()
 
     private static func currentSize() -> String {
         if IS_3_5_INCHES() {
