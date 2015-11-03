@@ -59,13 +59,14 @@ extension BCPeripheralManager {
             return
         }
         sendingData = NSKeyedArchiver.archivedDataWithRootObject([
-            "name": name,
-            "message": message
+            "message": message,
+            "name": name
         ])
 
-        DDLogInfo"Peripheral sending message: \(message)")
+        DDLogInfo("Peripheral sending message: \(message)")
 
-        // TODO: Do something with the whole message
+        let messageObject = BCMessage(message: message, name: name, isSelf: true)
+        BCDefaults.appendDataObjectToArray(messageObject, forKey: .Messages)
 
         sendData()
     }

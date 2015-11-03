@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21282F421BE89163007BC747 /* BCMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21282F411BE89163007BC747 /* BCMessage.swift */; };
 		2173E5D01BE7EF64000E6348 /* BCLogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2173E5CF1BE7EF64000E6348 /* BCLogFormatter.swift */; };
 		2173E5D21BE7FABF000E6348 /* BCDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2173E5D11BE7FABF000E6348 /* BCDevice.swift */; };
 		2173E5D41BE7FE6B000E6348 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2173E5D31BE7FE6B000E6348 /* UIApplication+Extensions.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		106A0299BA7AEB072EDE4839 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21282F411BE89163007BC747 /* BCMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCMessage.swift; sourceTree = "<group>"; };
 		2173E5CF1BE7EF64000E6348 /* BCLogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BCLogFormatter.swift; path = Application/BCLogFormatter.swift; sourceTree = "<group>"; };
 		2173E5D11BE7FABF000E6348 /* BCDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BCDevice.swift; path = Helpers/BCDevice.swift; sourceTree = "<group>"; };
 		2173E5D31BE7FE6B000E6348 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 		D725293D87C9F5A5E47757A2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				21282F411BE89163007BC747 /* BCMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 			files = (
 				21AEB6E51BE8286C00C8CFC0 /* BCPeripheralManager.swift in Sources */,
 				21AEB6E71BE85B9200C8CFC0 /* Array+Extensions.swift in Sources */,
+				21282F421BE89163007BC747 /* BCMessage.swift in Sources */,
 				2173E5D61BE7FEC0000E6348 /* BCDefaults.swift in Sources */,
 				21E783D91BE7DEA1005540C4 /* BCConstants.swift in Sources */,
 				21AEB6E31BE8286200C8CFC0 /* BCCentralManager.swift in Sources */,

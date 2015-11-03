@@ -203,16 +203,16 @@ extension BCCentralManager: CBPeripheralDelegate {
             if let dataString = String(data: data, encoding: NSUTF8StringEncoding) where dataString == "EOM" {
                 if let dataStore = dataStorage[peripheral.identifier],
                        dataDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(dataStore),
-                       name = dataDictionary["name"],
-                       message = dataDictionary["message"] {
+                       message = dataDictionary["message"],
+                       name = dataDictionary["name"] {
 
                     // Parse info from dictionary sent over
-                    if let name = name,
-                           message = message {
-                        DDLogInfo("Central received message \"\(message)\" from \"\(name)\" on \"\(BCTranslator.peripheralName(peripheral))\"")
+                    let message = message as! String
+                    let name = name as! String
+                    DDLogInfo("Central received message \"\(message)\" from \"\(name)\" on \"\(BCTranslator.peripheralName(peripheral))\"")
 
-                        // TODO: Do something with the whole message
-                    }
+                    let messageObject = BCMessage(message: message, name: name)
+                    BCDefaults.appendDataObjectToArray(messageObject, forKey: .Messages)
 
                     dataStorage[peripheral.identifier] = NSMutableData()
                 }

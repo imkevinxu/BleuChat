@@ -13,7 +13,8 @@ import Foundation
 struct BCDefaults {
 
     enum Keys: String {
-        case Name = "com.bleuchat.Name"
+        case Name     = "com.bleuchat.Name"
+        case Messages = "com.bleuchat.Messages"
     }
 
     // MARK: Singleton
@@ -71,6 +72,14 @@ extension BCDefaults {
         }
     }
 
+    static func dataObjectArrayForKey<T>(key: Keys) -> [T]? {
+        if let data = objectForKey(key) as? NSData {
+            return NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [T]?
+        } else {
+            return nil
+        }
+    }
+
     // MARK: Set Methods
 
     static func setBool(value: Bool, forKey key: Keys) {
@@ -101,6 +110,19 @@ extension BCDefaults {
     static func setDataObject(object: AnyObject?, forKey key: Keys) {
         if let object: AnyObject = object {
             setObject(NSKeyedArchiver.archivedDataWithRootObject(object), forKey: key)
+        } else {
+            setObject(nil, forKey: key)
+        }
+    }
+
+    static func appendDataObjectToArray(object: AnyObject?, forKey key: Keys) {
+        if let object: AnyObject = object {
+            if var objectArray: [AnyObject] = dataObjectArrayForKey(key) {
+                objectArray.append(object)
+                setObject(NSKeyedArchiver.archivedDataWithRootObject(objectArray), forKey: key)
+            } else {
+                setObject(NSKeyedArchiver.archivedDataWithRootObject([object]), forKey: key)
+            }
         } else {
             setObject(nil, forKey: key)
         }
