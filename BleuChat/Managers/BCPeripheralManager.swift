@@ -15,29 +15,102 @@ import CocoaLumberjack
 final class BCPeripheralManager: NSObject {
 
     var peripheralManager: CBPeripheralManager!
-    var transferCharacteristic: CBMutableCharacteristic?
+    var transferCharacteristic: CBMutableCharacteristic!
+    var sendingData: NSData = NSData()
+    var sendingDataIndex: Int = 0
+    var sendingEOM: Bool = false
 
     // MARK: Initializer
 
     override init() {
         super.init()
-        peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+        peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
+        transferCharacteristic = CBMutableCharacteristic(type: CHARACTERISTIC_CHAT_UUID, properties: .Notify, value: nil, permissions: .Readable)
     }
+}
 
-    func advertise() {
+// MARK: - Public Methods
 
+extension BCPeripheralManager {
 
+    func startAdvertising() {
+        let deviceName = "\(UIDevice.currentDevice().name) - \(Int(NSDate().timeIntervalSinceReferenceDate * 1000000))"
+
+        DDLogInfo("Peripheral started advertising as \"\(deviceName)\"")
         peripheralManager.startAdvertising([
-            CBAdvertisementDataLocalNameKey: "\(UIDevice.currentDevice().name) - \(NSDate().timeIntervalSince1970 * 1000)",
+            CBAdvertisementDataLocalNameKey: deviceName,
             CBAdvertisementDataServiceUUIDsKey: [SERVICE_CHAT_UUID]
-            ])
-        DDLogDebug("Peripheral started advertising as \(UIDevice.currentDevice().name) - \(NSDate().timeIntervalSince1970 * 1000)")
+        ])
+
+        // Peripheral advertises for only 10 seconds
+        delay(10) {
+            self.stopAdvertising()
+        }
     }
 
-    func stop() {
+    func stopAdvertising() {
+        DDLogInfo("Peripheral stopped advertising")
+        peripheralManager.stopAdvertising()
+    }
 
-                peripheralManager.stopAdvertising()
-                DDLogDebug("Peripheral stopped advertising")
+    func sendMessage(message: String) {
+        sendingData = NSKeyedArchiver.archivedDataWithRootObject([
+            "message": message
+        ])
+
+        // TODO: Do something with the whole message
+
+        sendData()
+    }
+}
+
+// MARK: - Private Methods
+
+extension BCPeripheralManager {
+
+    private func sendData() {
+        guard let eomData = "EOM".dataUsingEncoding(NSUTF8StringEncoding) else { return }
+        var didSend = true
+
+        if sendingEOM {
+            didSend = peripheralManager.updateValue(eomData, forCharacteristic: transferCharacteristic, onSubscribedCentrals: nil)
+            if didSend {
+                sendingEOM = false
+                DDLogInfo("Peripheral sent: <EOM>")
+            }
+            return
+        }
+
+        if sendingDataIndex >= sendingData.length {
+            sendingDataIndex = 0
+            return
+        }
+
+        while didSend {
+            var amountToSend = sendingData.length - sendingDataIndex
+            if amountToSend > BLUETOOTH_DATA_LENGTH {
+                amountToSend = BLUETOOTH_DATA_LENGTH
+            }
+
+            let chunk = NSData(bytes: sendingData.bytes + sendingDataIndex, length: amountToSend)
+            didSend = peripheralManager.updateValue(chunk, forCharacteristic: transferCharacteristic, onSubscribedCentrals: nil)
+            if !didSend {
+                return
+            }
+            DDLogInfo("Peripheral sent data: \"\(chunk)\"")
+
+            sendingDataIndex += amountToSend
+            if sendingDataIndex >= sendingData.length {
+                sendingEOM = true
+                sendingDataIndex = 0
+                didSend = peripheralManager.updateValue(eomData, forCharacteristic: transferCharacteristic, onSubscribedCentrals: nil)
+                if didSend {
+                    sendingEOM = false
+                    DDLogInfo("Peripheral sent: <EOM>")
+                }
+                return
+            }
+        }
     }
 }
 
@@ -49,45 +122,43 @@ extension BCPeripheralManager: CBPeripheralManagerDelegate {
 
     func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager) {
         switch peripheral.state {
-        case .PoweredOn:
-            DDLogDebug("Peripheral is powered on")
-        default:
-            DDLogDebug("Peripheral is not powered on")
-            return
+            case .PoweredOn:
+                DDLogInfo("Peripheral is powered ON")
+                let transferService = CBMutableService(type: SERVICE_CHAT_UUID, primary: true)
+                transferService.characteristics = [transferCharacteristic]
+                peripheralManager.addService(transferService)
+            default:
+                DDLogWarn("Peripheral is powered OFF")
+                UIApplication.presentAlert(title: "Bluetooth is Off", message: "Please turn on Bluetooth for Bleuchat to communicate with other devices")
+                return
         }
 
-        transferCharacteristic = CBMutableCharacteristic(type: CHARACTERISTIC_CHAT_UUID, properties: .Notify, value: nil, permissions: .Readable)
-        let transferService = CBMutableService(type: SERVICE_CHAT_UUID, primary: true)
+        // Peripheral is ON so start advertising
+        startAdvertising()
+    }
 
-        guard let transferCharacteristic = transferCharacteristic else { return }
-        transferService.characteristics = [transferCharacteristic]
-        peripheralManager.addService(transferService)
+    func peripheralManager(peripheral: CBPeripheralManager, didAddService service: CBService, error: NSError?) {
+        if let error = error {
+            DDLogError("Peripheral encountered error adding services: \(error.localizedDescription)")
+        }
+    }
+
+    func peripheralManagerDidStartAdvertising(peripheral: CBPeripheralManager, error: NSError?) {
+        if let error = error {
+            DDLogError("Peripheral encountered error advertising: \(error.localizedDescription)")
+        }
     }
 
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didSubscribeToCharacteristic characteristic: CBCharacteristic) {
-        DDLogDebug("Central subscribed to characteristic")
-        //        peripheralManager.stopAdvertising()
-        //        DDLogDebug("Peripheral stopped advertising")
+        DDLogInfo("Peripheral's \"\(BCTranslator.characteristicName(characteristic))\" has been subscribed to by a central")
     }
 
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFromCharacteristic characteristic: CBCharacteristic) {
-        DDLogDebug("Central unsubscribed to characteristic")
+        DDLogInfo("Peripheral's \"\(BCTranslator.characteristicName(characteristic))\" has been unsubscribed to by a central")
     }
 
     func peripheralManagerIsReadyToUpdateSubscribers(peripheral: CBPeripheralManager) {
-        DDLogDebug("Sending next chunk")
+        DDLogInfo("Peripheral is ready to send data")
         sendData()
-    }
-
-    func sendData() {
-        let dataToSend = "HELLO WORLD!".dataUsingEncoding(NSUTF8StringEncoding)
-
-        let didSend = peripheralManager.updateValue(dataToSend!, forCharacteristic: transferCharacteristic!, onSubscribedCentrals: nil)
-        if !didSend {
-            return
-        }
-
-        let stringFromData = String(data: dataToSend!, encoding: NSUTF8StringEncoding)
-        DDLogDebug("Sent: \(stringFromData)")
     }
 }

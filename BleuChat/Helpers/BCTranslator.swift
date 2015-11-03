@@ -35,4 +35,14 @@ struct BCTranslator {
                 return "Disconnected"
         }
     }
+
+    // MARK: Characteristics
+
+    static func characteristicName(characteristic: CBCharacteristic) -> String {
+        if characteristic.UUID == CHARACTERISTIC_CHAT_UUID {
+            return "Chat Characteristic"
+        } else {
+            return "Characteristic ID \(characteristic.UUID.UUIDString)"
+        }
+    }
 }

@@ -15,103 +15,56 @@ import CocoaLumberjack
 final class BCCentralManager: NSObject {
 
     var centralManager: CBCentralManager!
-    var discoveredPeripheral: CBPeripheral?
-    var discoveredPeripherals: [CBPeripheral?]
-    let data = NSMutableData()
+    var discoveredPeripherals: [CBPeripheral]!
+    var dataStorage: [NSUUID: NSMutableData]!
 
     // MARK: Initializer
 
     override init() {
-        discoveredPeripherals = []
         super.init()
-        centralManager = CBCentralManager(delegate: self, queue: nil)
+        centralManager = CBCentralManager(delegate: self, queue: nil, options: nil)
+        discoveredPeripherals = []
+        dataStorage = [:]
     }
 }
 
+// MARK: - Public Methods
 
+extension BCCentralManager {
 
-
-// MARK: - Delegates
-
-// MARK: CBCentralManagerDelegate
-
-extension BCCentralManager: CBCentralManagerDelegate {
-
-
-    func scan() {
-
+    func startScanning() {
+        DDLogInfo("Central started scanning")
         centralManager.scanForPeripheralsWithServices([SERVICE_CHAT_UUID], options: nil)
-        DDLogDebug("Central started scanning")
-    }
 
-    func stop() {
-
-                centralManager.stopScan()
-                DDLogDebug("Central stopped scanning")
-    }
-
-
-    func centralManagerDidUpdateState(central: CBCentralManager) {
-        switch central.state {
-            case .PoweredOn:
-                DDLogDebug("Central is powered on")
-            default:
-                DDLogDebug("Central is not powered on")
-                return
+        // Central scans for only 10 seconds
+        delay(10) {
+            self.stopScanning()
         }
     }
 
-    func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
-
-        DDLogDebug("Discovered \(peripheral.name) at \(RSSI)")
-        if peripheral != discoveredPeripheral {
-            discoveredPeripheral = peripheral
-            centralManager.connectPeripheral(peripheral, options: nil)
-        }
+    func stopScanning() {
+        DDLogInfo("Central stopped scanning")
+        centralManager.stopScan()
     }
+}
 
-    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        DDLogDebug("Failed to connect to \(peripheral.name). \(error?.localizedDescription)")
-        cleanup()
-    }
+// MARK: - Private Methods
 
-    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
-        DDLogDebug("Connected to \(peripheral.name)")
-        //        centralManager.stopScan()
-        //        DDLogDebug("Central stopped scanning")
+extension BCCentralManager {
 
-        // data associated to peripheral ID
-        data.length = 0
-        peripheral.delegate = self
-        peripheral.discoverServices([SERVICE_CHAT_UUID])
-    }
-
-    func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        DDLogDebug("\(peripheral.name) disconnected")
-        discoveredPeripheral = nil
-    }
-
-
-
-
-
-
-    private func cleanup() {
-        guard let discoveredPeripheral = discoveredPeripheral
-            else { return }
-
-        if discoveredPeripheral.state != .Connected {
+    private func cleanup(peripheral: CBPeripheral) {
+        if peripheral.state != .Connected {
             return
         }
 
-        if discoveredPeripheral.services != nil {
-            for service in discoveredPeripheral.services! {
-                if service.characteristics != nil {
-                    for characteristic in service.characteristics! {
+        DDLogInfo("Central cleaning up connections")
+        if let services = peripheral.services {
+            for service in services {
+                if let characteristics = service.characteristics {
+                    for characteristic in characteristics {
                         if characteristic.UUID == CHARACTERISTIC_CHAT_UUID {
                             if characteristic.isNotifying {
-                                discoveredPeripheral.setNotifyValue(false, forCharacteristic: characteristic)
-                                return
+                                peripheral.setNotifyValue(false, forCharacteristic: characteristic)
                             }
                         }
                     }
@@ -119,69 +72,159 @@ extension BCCentralManager: CBCentralManagerDelegate {
             }
         }
 
-        centralManager.cancelPeripheralConnection(discoveredPeripheral)
+        centralManager.cancelPeripheralConnection(peripheral)
     }
 }
 
+// MARK: - Delegates
 
+// MARK: CBCentralManagerDelegate
+
+extension BCCentralManager: CBCentralManagerDelegate {
+
+    func centralManagerDidUpdateState(central: CBCentralManager) {
+        switch central.state {
+            case .PoweredOn:
+                DDLogInfo("Central is powered ON")
+            default:
+                DDLogWarn("Central is powered OFF")
+                UIApplication.presentAlert(title: "Bluetooth is Off", message: "Please turn on Bluetooth for Bleuchat to communicate with other devices")
+                return
+        }
+
+        // Central is ON so start scanning
+        startScanning()
+    }
+
+    func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+        DDLogInfo("Central discovered \"\(BCTranslator.peripheralName(peripheral))\" (State: \(BCTranslator.peripheralState(peripheral)), RSSI: \(RSSI))")
+
+        // Store newly discovered peripheral and connect to it
+        if discoveredPeripherals.indexOf(peripheral) == nil {
+            discoveredPeripherals.append(peripheral)
+
+            DDLogInfo("Central connecting to \"\(BCTranslator.peripheralName(peripheral))\"")
+            centralManager.connectPeripheral(peripheral, options: nil)
+        }
+    }
+
+    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+        DDLogInfo("Central connected to \"\(BCTranslator.peripheralName(peripheral))\"")
+
+        // Initialize empty data for peripheral and start looking for services
+        dataStorage[peripheral.identifier] = NSMutableData()
+        peripheral.delegate = self
+        peripheral.discoverServices([SERVICE_CHAT_UUID])
+    }
+
+    func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+        DDLogInfo("Central disconnected from \"\(BCTranslator.peripheralName(peripheral))\"")
+
+        // Remove peripheral and corresponding data from memory
+        discoveredPeripherals.removeObject(peripheral)
+        dataStorage.removeValueForKey(peripheral.identifier)
+    }
+
+    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+        if let error = error {
+            DDLogError("Central failed to connect to \"\(BCTranslator.peripheralName(peripheral))\". Error: \(error.localizedDescription)")
+        }
+        cleanup(peripheral)
+    }
+}
 
 // MARK: CBPeripheralDelegate
 
 extension BCCentralManager: CBPeripheralDelegate {
+
     func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
-        if error != nil {
-            DDLogDebug("Error discovering services: \(error?.localizedDescription)")
-            cleanup()
+        if let error = error {
+            DDLogError("Central encountered error discovering services: \(error.localizedDescription)")
+            cleanup(peripheral)
             return
         }
 
-        for service in peripheral.services! {
-            peripheral.discoverCharacteristics([CHARACTERISTIC_CHAT_UUID], forService: service)
+        if let services = peripheral.services {
+            for service in services {
+                peripheral.discoverCharacteristics([CHARACTERISTIC_CHAT_UUID], forService: service)
+            }
         }
     }
 
     func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
-        if error != nil {
-            DDLogDebug("Error discovering characteristics: \(error?.localizedDescription)")
-            cleanup()
+        if let error = error {
+            DDLogError("Central encountered error discovering characteristics: \(error.localizedDescription)")
+            cleanup(peripheral)
             return
         }
 
-        for characteristic in service.characteristics! {
-            if characteristic.UUID == CHARACTERISTIC_CHAT_UUID {
-                peripheral.setNotifyValue(true, forCharacteristic: characteristic)
+        if let characteristics = service.characteristics {
+            for characteristic in characteristics {
+
+                // Found desired characteristics on peripheral so subscribe to it
+                if characteristic.UUID == CHARACTERISTIC_CHAT_UUID {
+                    DDLogInfo("Central subscribed to \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
+                    peripheral.setNotifyValue(true, forCharacteristic: characteristic)
+                }
+            }
+        }
+    }
+
+    func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+        if let error = error {
+            DDLogError("Central encountered error while updating notification state: \(error.localizedDescription)")
+            cleanup(peripheral)
+            return
+        }
+
+        if characteristic.UUID == CHARACTERISTIC_CHAT_UUID {
+            if characteristic.isNotifying {
+                DDLogInfo("Central will be notified by \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
+            } else {
+                DDLogInfo("Central stopped getting notified by \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\". Disconnecting")
+                centralManager.cancelPeripheralConnection(peripheral)
             }
         }
     }
 
     func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
-        if error != nil {
-            DDLogDebug("Error getting updated value: \(error?.localizedDescription)")
+        if let error = error {
+            DDLogError("Central encountered error while retrieving updated value: \(error.localizedDescription)")
+            cleanup(peripheral)
             return
         }
 
-        let stringFromData = String(data: characteristic.value!, encoding: NSUTF8StringEncoding)
-        data.appendData(characteristic.value!)
-        // or remove data stuff
-        DDLogDebug("Received: \(stringFromData)")
+        if characteristic.UUID == CHARACTERISTIC_CHAT_UUID {
+            guard let data = characteristic.value else {
+                DDLogWarn("Central received empty data from \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
+                return
+            }
 
-    }
+            if let dataString = String(data: data, encoding: NSUTF8StringEncoding) where dataString == "EOM" {
+                if let dataStore = dataStorage[peripheral.identifier],
+                       dataDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(dataStore),
+                       message = dataDictionary["message"] {
 
-    func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+                    // Parse info from dictionary sent over
+                    if let message = message {
+                        DDLogInfo("Central received message \"\(message)\" from \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
 
-        if error != nil {
-            DDLogDebug("Error changing notification state: \(error?.localizedDescription)")
-            return
-        }
+                        // TODO: Do something with the whole message
+                    }
 
-        if characteristic.UUID != CHARACTERISTIC_CHAT_UUID {
-            return
-        }
-        if characteristic.isNotifying {
-            DDLogDebug("Notification began on: \(characteristic)")
-        } else {
-            DDLogDebug("Notification stopped on: \(characteristic). Disconnecting")
-            centralManager.cancelPeripheralConnection(peripheral)
+                    dataStorage[peripheral.identifier] = NSMutableData()
+                }
+            } else {
+
+                // Append data chunks to local storage
+                if let dataStore = dataStorage[peripheral.identifier] {
+                    dataStore.appendData(data)
+                    dataStorage[peripheral.identifier] = dataStore
+                } else {
+                    dataStorage[peripheral.identifier] = NSMutableData(data: data)
+                }
+                DDLogInfo("Central received chunk \"\(data)\" from \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
+            }
         }
     }
 }

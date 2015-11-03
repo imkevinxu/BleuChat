@@ -29,8 +29,8 @@ extension BCChatViewController {
     }
 
     override func viewWillDisappear(animated: Bool) {
-        centralManager.stop()
-        peripheralManager.stop()
+        centralManager.stopScanning()
+        peripheralManager.stopAdvertising()
 
         super.viewWillDisappear(animated)
     }
@@ -58,11 +58,11 @@ extension BCChatViewController {
 extension BCChatViewController {
 
     func sendButtonTapped(sender: UIButton) {
-        peripheralManager.sendData()
+        peripheralManager.sendMessage("HELLO WAkls dfjsal;kfj sdakl;fj skal;dfj lawgroisjgvs;lijks;ekjtl4;kjygs5elkjye5jy3u502u4890u520358190u5joitjglskgjwoirgjsropigj4a9p8h92at894uithaow4ituhiesuhrlfzxjgkvklzfjgfdgkljfdkgjdlks h935 yt398u t924u9!")
     }
 
     func scanButtonTapped(sender: UIButton) {
-        centralManager.scan()
-        peripheralManager.advertise()
+        centralManager.startScanning()
+        peripheralManager.startAdvertising()
     }
 }

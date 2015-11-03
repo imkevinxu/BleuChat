@@ -15,6 +15,9 @@
 		21866C3E1BDE0E0300B7653C /* BCMainUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21866C3D1BDE0E0300B7653C /* BCMainUITests.swift */; };
 		21AEB6E31BE8286200C8CFC0 /* BCCentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AEB6E21BE8286200C8CFC0 /* BCCentralManager.swift */; };
 		21AEB6E51BE8286C00C8CFC0 /* BCPeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AEB6E41BE8286C00C8CFC0 /* BCPeripheralManager.swift */; };
+		21AEB6E71BE85B9200C8CFC0 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AEB6E61BE85B9200C8CFC0 /* Array+Extensions.swift */; };
+		21AEB6E91BE866BB00C8CFC0 /* BCTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AEB6E81BE866BB00C8CFC0 /* BCTranslator.swift */; };
+		21AEB6EB1BE86FEA00C8CFC0 /* BCFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AEB6EA1BE86FEA00C8CFC0 /* BCFunctions.swift */; };
 		21C1EACA1BDE1985008A482E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21C1EAC81BDE1985008A482E /* LaunchScreen.xib */; };
 		21C1EACE1BDE19EA008A482E /* BCAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C1EACD1BDE19EA008A482E /* BCAppDelegate.swift */; };
 		21C1EAD21BDE1CA8008A482E /* BCChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C1EAD11BDE1CA8008A482E /* BCChatViewController.swift */; };
@@ -57,6 +60,9 @@
 		21866C3F1BDE0E0300B7653C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21AEB6E21BE8286200C8CFC0 /* BCCentralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BCCentralManager.swift; path = BleuChat/Managers/BCCentralManager.swift; sourceTree = SOURCE_ROOT; };
 		21AEB6E41BE8286C00C8CFC0 /* BCPeripheralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BCPeripheralManager.swift; path = BleuChat/Managers/BCPeripheralManager.swift; sourceTree = SOURCE_ROOT; };
+		21AEB6E61BE85B9200C8CFC0 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		21AEB6E81BE866BB00C8CFC0 /* BCTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BCTranslator.swift; path = Helpers/BCTranslator.swift; sourceTree = "<group>"; };
+		21AEB6EA1BE86FEA00C8CFC0 /* BCFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BCFunctions.swift; path = Helpers/BCFunctions.swift; sourceTree = "<group>"; };
 		21C1EAC71BDE1985008A482E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21C1EAC81BDE1985008A482E /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		21C1EACD1BDE19EA008A482E /* BCAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BCAppDelegate.swift; path = Application/BCAppDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +127,7 @@
 		175782B9E8DFDF2992B601F1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				21AEB6E61BE85B9200C8CFC0 /* Array+Extensions.swift */,
 				2173E5D31BE7FE6B000E6348 /* UIApplication+Extensions.swift */,
 			);
 			path = Extensions;
@@ -169,6 +176,8 @@
 				21E783D81BE7DEA1005540C4 /* BCConstants.swift */,
 				2173E5D51BE7FEC0000E6348 /* BCDefaults.swift */,
 				2173E5D11BE7FABF000E6348 /* BCDevice.swift */,
+				21AEB6EA1BE86FEA00C8CFC0 /* BCFunctions.swift */,
+				21AEB6E81BE866BB00C8CFC0 /* BCTranslator.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -563,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21AEB6E51BE8286C00C8CFC0 /* BCPeripheralManager.swift in Sources */,
+				21AEB6E71BE85B9200C8CFC0 /* Array+Extensions.swift in Sources */,
 				2173E5D61BE7FEC0000E6348 /* BCDefaults.swift in Sources */,
 				21E783D91BE7DEA1005540C4 /* BCConstants.swift in Sources */,
 				21AEB6E31BE8286200C8CFC0 /* BCCentralManager.swift in Sources */,
@@ -571,6 +581,8 @@
 				2173E5D01BE7EF64000E6348 /* BCLogFormatter.swift in Sources */,
 				21C1EACE1BDE19EA008A482E /* BCAppDelegate.swift in Sources */,
 				2173E5D21BE7FABF000E6348 /* BCDevice.swift in Sources */,
+				21AEB6EB1BE86FEA00C8CFC0 /* BCFunctions.swift in Sources */,
+				21AEB6E91BE866BB00C8CFC0 /* BCTranslator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
