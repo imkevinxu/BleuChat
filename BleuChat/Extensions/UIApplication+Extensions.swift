@@ -35,4 +35,14 @@ extension UIApplication {
                 return "Background"
         }
     }
+
+    class func presentAlert(title title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .Cancel, handler: nil))
+
+        if let window = sharedApplication().keyWindow,
+               rootViewController = window.rootViewController {
+            rootViewController.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
 }
