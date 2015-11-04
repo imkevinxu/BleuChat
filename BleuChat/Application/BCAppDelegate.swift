@@ -8,6 +8,7 @@
 
 import UIKit
 import CocoaLumberjack
+import SwiftColors
 
 // MARK: - Properties
 
@@ -62,6 +63,15 @@ extension BCAppDelegate {
     private func configureLogger() {
         let sharedLogger = DDTTYLogger.sharedInstance()
         sharedLogger.logFormatter = BCLogFormatter()
+
+        // Enable if you have Xcode colors installed. Custom colors work best on dark background
+        // https://github.com/CocoaLumberjack/CocoaLumberjack/blob/master/Documentation/XcodeColors.md
+        sharedLogger.colorsEnabled = true
+        sharedLogger.setForegroundColor(UIColor(hexString: "#F8271B"), backgroundColor: nil, forFlag: DDLogFlag.Error)
+        sharedLogger.setForegroundColor(UIColor(hexString: "#E5ED15"), backgroundColor: nil, forFlag: DDLogFlag.Warning)
+        sharedLogger.setForegroundColor(UIColor(hexString: "#2FFF17"), backgroundColor: nil, forFlag: DDLogFlag.Info)
+        sharedLogger.setForegroundColor(UIColor(hexString: "#31B2BB"), backgroundColor: nil, forFlag: DDLogFlag.Debug)
+        sharedLogger.setForegroundColor(UIColor(hexString: "#F2BC00"), backgroundColor: nil, forFlag: DDLogFlag.Verbose)
         DDLog.addLogger(sharedLogger)
     }
 
