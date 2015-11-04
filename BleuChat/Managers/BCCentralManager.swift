@@ -17,7 +17,10 @@ final class BCCentralManager: NSObject {
     var centralManager: CBCentralManager!
     var discoveredPeripherals: [CBPeripheral]!
     var dataStorage: [NSUUID: NSMutableData]!
-    var transportManager: BCTransportManager!
+
+    // MARK: Delegate
+
+    weak var delegate: BCMessageable?
 
     // MARK: Initializer
 
@@ -26,7 +29,6 @@ final class BCCentralManager: NSObject {
         centralManager = CBCentralManager(delegate: self, queue: nil, options: nil)
         discoveredPeripherals = []
         dataStorage = [:]
-        transportManager = BCTransportManager()
     }
 }
 
@@ -204,8 +206,21 @@ extension BCCentralManager: CBPeripheralDelegate {
 
             if let dataString = String(data: data, encoding: NSUTF8StringEncoding),
                    dataStore = dataStorage[peripheral.identifier]
-               where dataString == "EOM" {
-                transportManager.receivedMessage(dataStore)
+               where dataString == "EOM"
+            {
+                if let dataDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(dataStore),
+                    message = dataDictionary["message"],
+                    name = dataDictionary["name"]
+                {
+                    let message = message as! String
+                    let name = name as! String
+                    let messageObject = BCMessage(message: message, name: name)
+                    BCDefaults.appendDataObjectToArray(messageObject, forKey: .Messages)
+                    if let delegate = delegate {
+                        delegate.updateWithNewMessage(messageObject)
+                    }
+                    DDLogInfo("Central received message: \"\(message)\" from \"\(name)\"")
+                }
                 dataStorage[peripheral.identifier] = NSMutableData()
 
             } else {

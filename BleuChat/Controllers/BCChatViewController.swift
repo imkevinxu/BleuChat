@@ -26,6 +26,8 @@ extension BCChatViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
+        centralManager.delegate = self
+        peripheralManager.delegate = self
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -49,6 +51,14 @@ extension BCChatViewController {
         sendButton.snp_makeConstraints { make in
             make.center.equalTo(view)
         }
+
+        let messagesButton = UIButton(type: .System)
+        messagesButton.setTitle("View Messages", forState: .Normal)
+        messagesButton.addTarget(self, action: "messagesButtonTapped:", forControlEvents: .TouchUpInside)
+        view.addSubview(messagesButton)
+        messagesButton.snp_makeConstraints { make in
+            make.center.equalTo(view).offset(CGPointMake(0, -100))
+        }
     }
 }
 
@@ -65,5 +75,28 @@ extension BCChatViewController {
     func scanButtonTapped(sender: UIButton) {
         centralManager.startScanning()
         peripheralManager.startAdvertising()
+    }
+
+    func messagesButtonTapped(sender: UIButton) {
+        if let messages: [BCMessage] = BCDefaults.dataObjectArrayForKey(.Messages) {
+            DDLogDebug("\(messages)")
+        } else {
+            DDLogDebug("NIL")
+        }
+        BCDefaults.resetDefaults()
+    }
+}
+
+// MARK: - Delegates
+
+// MARK: BCMessageable
+
+extension BCChatViewController: BCMessageable {
+    func updateWithNewMessage(message: BCMessage) {
+        if message.isSelf {
+            DDLogInfo("You said: \(message.message)")
+        } else {
+            DDLogInfo("NEW: \(message.message) from \(message.name)")
+        }
     }
 }
