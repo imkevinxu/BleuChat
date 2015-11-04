@@ -89,7 +89,7 @@ extension BCCentralManager: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(central: CBCentralManager) {
         switch central.state {
             case .PoweredOn:
-                DDLogInfo("Central is powered ON")
+                DDLogDebug("Central is powered ON")
             default:
                 DDLogWarn("Central is powered OFF")
                 UIApplication.presentAlert(title: "Bluetooth is Off", message: "Please turn on Bluetooth for Bleuchat to communicate with other devices")

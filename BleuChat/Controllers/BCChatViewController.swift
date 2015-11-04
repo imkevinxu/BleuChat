@@ -79,9 +79,9 @@ extension BCChatViewController {
 
     func messagesButtonTapped(sender: UIButton) {
         if let messages: [BCMessage] = BCDefaults.dataObjectArrayForKey(.Messages) {
-            DDLogDebug("\(messages)")
+            DDLogInfo("\(messages)")
         } else {
-            DDLogDebug("NIL")
+            DDLogInfo("NIL")
         }
         BCDefaults.resetDefaults()
     }

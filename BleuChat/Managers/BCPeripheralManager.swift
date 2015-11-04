@@ -136,7 +136,7 @@ extension BCPeripheralManager: CBPeripheralManagerDelegate {
     func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager) {
         switch peripheral.state {
             case .PoweredOn:
-                DDLogInfo("Peripheral is powered ON")
+                DDLogDebug("Peripheral is powered ON")
                 let transferService = CBMutableService(type: SERVICE_CHAT_UUID, primary: true)
                 transferService.characteristics = [transferCharacteristic]
                 peripheralManager.addService(transferService)
