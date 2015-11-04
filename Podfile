@@ -19,6 +19,10 @@ pod 'CocoaLumberjack/Swift', '~> 2.0'
 # https://github.com/lmirosevic/GBDeviceInfo
 pod 'GBDeviceInfo', '~> 3.6'
 
+# Drop-in UIViewController subclass with a growing text input view and other useful messaging features
+# https://github.com/slackhq/SlackTextViewController
+pod 'SlackTextViewController', '~> 1.7'
+
 # Autolayout DSL for iOS
 # https://github.com/SnapKit/SnapKit
 pod 'SnapKit', '~> 0.15'
