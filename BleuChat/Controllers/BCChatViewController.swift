@@ -10,6 +10,7 @@ import UIKit
 import CoreBluetooth
 import CocoaLumberjack
 import SlackTextViewController
+import AudioToolbox
 
 // MARK: - Properties
 
@@ -111,6 +112,31 @@ extension BCChatViewController {
 
         // Change text view placeholder
         textView.placeholder = "Type a message…"
+
+        setupName()
+    }
+
+    private func setupName() {
+        if BCDefaults.stringForKey(.Name) == nil {
+            let alert = UIAlertController(title: "Welcome", message: "Please set your name, it can be anything you want!", preferredStyle: .Alert)
+            alert.addTextFieldWithConfigurationHandler { textField in
+                textField.placeholder = "Name"
+                textField.autocapitalizationType = .Words
+            }
+
+            // Create save and cancel actions
+            let saveNameAction = UIAlertAction(title: "Save", style: .Default) { action in
+                let nameTextField = alert.textFields![0]
+                if nameTextField.text != "" {
+                    BCDefaults.setObject(nameTextField.text, forKey: .Name)
+                } else {
+                    self.setupName()
+                }
+            }
+
+            alert.addAction(saveNameAction)
+            presentViewController(alert, animated: true, completion: nil)
+        }
     }
 }
 
@@ -121,9 +147,9 @@ extension BCChatViewController {
 
     func scanButtonTapped(sender: UIButton) {
 
-        // Start looking for connections for 8 seconds
-        centralManager.startScanning(8)
-        peripheralManager.startAdvertising(8)
+        // Start looking for connections for 10 seconds
+        centralManager.startScanning(10)
+        peripheralManager.startAdvertising(10)
     }
 
     func infoButtonTapped(sender: UIButton) {
@@ -184,6 +210,9 @@ extension BCChatViewController: BCChatRoomProtocol {
             self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
             self.tableView.endUpdates()
 
+            // Vibrate phone when receiving new message
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+
             // Scroll to most recent message if user sent it
             if message.isSelf {
                 self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
@@ -226,6 +255,7 @@ extension BCChatViewController: BCChatRoomProtocol {
         }
 
         title = "Chatroom (\(chatroomUsers.count + 1))"
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
 
     func userLeft(peripheralID: NSUUID) {
@@ -245,6 +275,7 @@ extension BCChatViewController: BCChatRoomProtocol {
             updateWithNewMessage(message)
         }
         title = "Chatroom (\(chatroomUsers.count + 1))"
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
 }
 
