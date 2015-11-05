@@ -88,7 +88,7 @@ extension BCMessage {
                messagePeripheralID = message.peripheralID {
             return peripheralID != messagePeripheralID || name != message.name
         }
-        return isSelf != message.isSelf
+        return isSelf != message.isSelf || name != message.name
     }
 
     func isSignificantlyOlderThan(message: BCMessage) -> Bool {

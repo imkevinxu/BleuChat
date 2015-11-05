@@ -86,10 +86,16 @@ extension BCPeripheralManager {
         sendData()
     }
 
-    func sendName() {
+    func sendName(isSelf isSelf: Bool = false, oldName: String? = nil) {
         guard let name = BCDefaults.stringForKey(.Name) else {
             UIApplication.presentAlert(title: "Name Not Set", message: "Please enter your name by clicking the information icon in the top right corner")
             return
+        }
+
+        if let oldName = oldName where isSelf {
+            let message = BCMessage(message: "Changed their name to \(name)", name: oldName, isSelf: true, isStatus: true)
+            BCDefaults.appendDataObjectToArray(message, forKey: .Messages)
+            delegate?.updateWithNewMessage(message)
         }
 
         DDLogInfo("Peripheral sending name: \"\(name)\"")

@@ -202,7 +202,7 @@ extension BCChatViewController: BCChatRoomProtocol {
                 infoViewController.refreshUserTable(Array(chatroomUsers.values))
 
                 // Create and add status message to local database
-                let message = BCMessage(message: "Changed their name to \(name)", name: oldName, isStatus: true, peripheralID: peripheralID)
+                let message = BCMessage(message: "> Changed their name to \(name)", name: oldName, isStatus: true, peripheralID: peripheralID)
                 BCDefaults.appendDataObjectToArray(message, forKey: .Messages)
 
                 // Send status message
@@ -218,7 +218,7 @@ extension BCChatViewController: BCChatRoomProtocol {
             infoViewController.refreshUserTable(Array(chatroomUsers.values))
 
             // Create and add status message to local database
-            let message = BCMessage(message: "Joined the room", name: name, isStatus: true, peripheralID: peripheralID)
+            let message = BCMessage(message: "> Joined the room", name: name, isStatus: true, peripheralID: peripheralID)
             BCDefaults.appendDataObjectToArray(message, forKey: .Messages)
 
             // Send status message
@@ -238,7 +238,7 @@ extension BCChatViewController: BCChatRoomProtocol {
             infoViewController.refreshUserTable(Array(chatroomUsers.values))
 
             // Create and add status message to local database
-            let message = BCMessage(message: "Left the room", name: name, isStatus: true, peripheralID: peripheralID)
+            let message = BCMessage(message: "> Left the room", name: name, isStatus: true, peripheralID: peripheralID)
             BCDefaults.appendDataObjectToArray(message, forKey: .Messages)
 
             // Send status message
