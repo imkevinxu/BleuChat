@@ -19,7 +19,7 @@ final class BCChatViewController: SLKTextViewController {
     var peripheralManager: BCPeripheralManager!
     var cachedMessages: [BCMessage]!
     var cachedHeights: [Int: CGFloat] = [:]
-    var chatroomUsers: [String] = []
+    var chatroomUsers: [NSUUID: String] = [:]
 
     // MARK: Initializers
 
@@ -80,7 +80,7 @@ extension BCChatViewController {
 
         // Set navigation bar items
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "scanButtonTapped:")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Info"), style: .Plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Info"), style: .Plain, target: self, action: "infoButtonTapped:")
 
         // Setup table view
         tableView.separatorStyle = .None
@@ -103,6 +103,17 @@ extension BCChatViewController {
         // Start looking for connections for 8 seconds
         centralManager.startScanning(8)
         peripheralManager.startAdvertising(8)
+    }
+
+    func infoButtonTapped(sender: UIButton) {
+
+        // Segue to info view controller
+        if let navigationController = navigationController {
+            let infoViewController = BCInfoViewController()
+            infoViewController.peripheralManager = peripheralManager
+            infoViewController.chatroomUsers = chatroomUsers
+            navigationController.pushViewController(infoViewController, animated: true)
+        }
     }
 
     override func didPressRightButton(sender: AnyObject!) {
@@ -159,6 +170,51 @@ extension BCChatViewController: BCChatRoomProtocol {
             }
             self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         })
+    }
+
+    func userJoined(name: String, peripheralID: NSUUID) {
+        if let oldName = chatroomUsers[peripheralID] {
+            if oldName != name {
+                // Update user's name in local cache
+                chatroomUsers[peripheralID] = name
+
+                // Create and add status message to local database
+                let message = BCMessage(message: "Changed their name to \(name)", name: oldName, isStatus: true, peripheralID: peripheralID)
+                BCDefaults.appendDataObjectToArray(message, forKey: .Messages)
+
+                // Send status message
+                updateWithNewMessage(message)
+            }
+
+        } else {
+
+            // Add user to local cache
+            chatroomUsers[peripheralID] = name
+
+            // Create and add status message to local database
+            let message = BCMessage(message: "Joined the room", name: name, isStatus: true, peripheralID: peripheralID)
+            BCDefaults.appendDataObjectToArray(message, forKey: .Messages)
+
+            // Send status message
+            updateWithNewMessage(message)
+        }
+        title = "Chatroom (\(chatroomUsers.count + 1))"
+    }
+
+    func userLeft(peripheralID: NSUUID) {
+        if let name = chatroomUsers[peripheralID] {
+
+            // Remove user from local cache
+            chatroomUsers.removeValueForKey(peripheralID)
+
+            // Create and add status message to local database
+            let message = BCMessage(message: "Left the room", name: name, isStatus: true, peripheralID: peripheralID)
+            BCDefaults.appendDataObjectToArray(message, forKey: .Messages)
+
+            // Send status message
+            updateWithNewMessage(message)
+        }
+        title = "Chatroom (\(chatroomUsers.count + 1))"
     }
 }
 
