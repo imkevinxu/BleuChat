@@ -17,7 +17,7 @@ final class BCChatTableViewCell: UITableViewCell {
     var message: BCMessage?
     var messageLabel: UILabel?
     var metaDataLabel: UILabel?
-    var showMetaData: Bool = true
+    var showMetaData: Bool = false
 
     // Helper Variables
 
@@ -104,17 +104,26 @@ extension BCChatTableViewCell {
 
     private func styledMetaDataLabel(message: BCMessage) -> UILabel {
 
-        // Create time formatter
+        // Create date and time formatters
+        // Display calendar date for date if message is older than five days
+        let dateFormatter = NSDateFormatter()
+        let fiveDaysAgo = NSDate().dateByAddingTimeInterval(-60 * 60 * 24 * 5)
+        if fiveDaysAgo.compare(message.timestamp) == .OrderedDescending {
+            dateFormatter.dateFormat = "MMM d"
+        } else {
+            dateFormatter.dateFormat = "EEE"
+        }
         let timeFormatter = NSDateFormatter()
         timeFormatter.timeStyle = .ShortStyle
 
         // Create label and attributed string
         let metaDataLabel = UILabel(frame: CGRectZero)
-        let metaDataAttributedString = NSMutableAttributedString(string: "\(message.name)  \(timeFormatter.stringFromDate(message.timestamp))")
+        let metaDataDate = "\(dateFormatter.stringFromDate(message.timestamp)), \(timeFormatter.stringFromDate(message.timestamp))"
+        let metaDataAttributedString = NSMutableAttributedString(string: "\(message.name)  \(metaDataDate)")
 
         // Find name and time ranges
         let nameRange = (metaDataAttributedString.string as NSString).rangeOfString(message.name)
-        let timeRange = (metaDataAttributedString.string as NSString).rangeOfString(timeFormatter.stringFromDate(message.timestamp))
+        let timeRange = (metaDataAttributedString.string as NSString).rangeOfString(metaDataDate)
 
         // Create name and time attributes
         var nameAttributes = [
