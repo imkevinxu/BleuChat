@@ -88,7 +88,7 @@ extension BCMessage {
     }
 
     func isSignificantlyOlderThan(message: BCMessage) -> Bool {
-        let fiveMinAfter = timestamp.dateByAddingTimeInterval(60 * 3)
-        return fiveMinAfter.compare(message.timestamp) == .OrderedAscending
+        let fiveMinAfter = message.timestamp.dateByAddingTimeInterval(60 * 5)
+        return fiveMinAfter.compare(timestamp) == .OrderedAscending
     }
 }
