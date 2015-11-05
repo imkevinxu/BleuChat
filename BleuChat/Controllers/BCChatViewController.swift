@@ -44,11 +44,26 @@ extension BCChatViewController {
         setupViewController()
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Reload chatroom if messages have been changed in the database
+        let storedMessages = BCDefaults.dataObjectArrayForKey(.Messages)?.reverse() as [BCMessage]!
+        if storedMessages == nil || storedMessages.count != cachedMessages.count {
+            cachedMessages = storedMessages == nil ? [] : storedMessages
+            tableView.reloadData()
+        }
+    }
+
     override func viewWillDisappear(animated: Bool) {
 
         // Stop scanning if view controller disappears
         centralManager.stopScanning()
         peripheralManager.stopAdvertising()
+
+        // Make sure keyboard is not showing when we rewind back
+        view.endEditing(true)
+
         super.viewWillDisappear(animated)
     }
 
@@ -71,7 +86,11 @@ extension BCChatViewController {
         shakeToClearEnabled = true
 
         // Retrieve cached messages from local database
-        cachedMessages = BCDefaults.dataObjectArrayForKey(.Messages)?.reverse() as [BCMessage]!
+        if let storedMessages = BCDefaults.dataObjectArrayForKey(.Messages)?.reverse() as [BCMessage]! {
+            cachedMessages = storedMessages
+        } else {
+            cachedMessages = []
+        }
 
         // Register custom table view cell class for reuse
         tableView.registerClass(BCChatTableViewCell.self, forCellReuseIdentifier: CHAT_CELL_IDENTIFIER)
