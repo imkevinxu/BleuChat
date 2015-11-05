@@ -25,6 +25,7 @@
 		21C1EAD21BDE1CA8008A482E /* BCChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C1EAD11BDE1CA8008A482E /* BCChatViewController.swift */; };
 		21E783D91BE7DEA1005540C4 /* BCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E783D81BE7DEA1005540C4 /* BCConstants.swift */; };
 		21F99FBA1BE8AE0B00F279E9 /* BCChatRoomProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F99FB91BE8AE0B00F279E9 /* BCChatRoomProtocol.swift */; };
+		21FECDFF1BEB916E00CF05F4 /* BCInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FECDFE1BEB916E00CF05F4 /* BCInfoViewController.swift */; };
 		746C4D15103D9A893529E19E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106A0299BA7AEB072EDE4839 /* Pods.framework */; };
 		8D7B6A061EBA857E4562B58A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2EE17BF5A7C95A57D3A9D6F /* Images.xcassets */; };
 		B745E432FB45802603496828 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106A0299BA7AEB072EDE4839 /* Pods.framework */; };
@@ -76,6 +77,7 @@
 		21E783D81BE7DEA1005540C4 /* BCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BCConstants.swift; path = Helpers/BCConstants.swift; sourceTree = "<group>"; };
 		21F024701BDE200000F9D05E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		21F99FB91BE8AE0B00F279E9 /* BCChatRoomProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BCChatRoomProtocol.swift; path = Protocols/BCChatRoomProtocol.swift; sourceTree = "<group>"; };
+		21FECDFE1BEB916E00CF05F4 /* BCInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCInfoViewController.swift; sourceTree = "<group>"; };
 		4850CA3ED004566C4D19E393 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AD4E3B1AE1B61D7A2B701930 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		B2EE17BF5A7C95A57D3A9D6F /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				21C1EAD11BDE1CA8008A482E /* BCChatViewController.swift */,
+				21FECDFE1BEB916E00CF05F4 /* BCInfoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				21282F421BE89163007BC747 /* BCMessage.swift in Sources */,
 				21F99FBA1BE8AE0B00F279E9 /* BCChatRoomProtocol.swift in Sources */,
 				2173E5D61BE7FEC0000E6348 /* BCDefaults.swift in Sources */,
+				21FECDFF1BEB916E00CF05F4 /* BCInfoViewController.swift in Sources */,
 				21E783D91BE7DEA1005540C4 /* BCConstants.swift in Sources */,
 				21AEB6E31BE8286200C8CFC0 /* BCCentralManager.swift in Sources */,
 				210B2E2E1BE9AD4F00E8B21E /* BCChatTableViewCell.swift in Sources */,

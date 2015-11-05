@@ -15,6 +15,8 @@ import SlackTextViewController
 
 final class BCChatViewController: SLKTextViewController {
 
+    let infoViewController = BCInfoViewController()
+
     var centralManager: BCCentralManager!
     var peripheralManager: BCPeripheralManager!
     var cachedMessages: [BCMessage]!
@@ -109,9 +111,8 @@ extension BCChatViewController {
 
         // Segue to info view controller
         if let navigationController = navigationController {
-            let infoViewController = BCInfoViewController()
             infoViewController.peripheralManager = peripheralManager
-            infoViewController.chatroomUsers = chatroomUsers
+            infoViewController.chatroomUsers = Array(chatroomUsers.values)
             navigationController.pushViewController(infoViewController, animated: true)
         }
     }
@@ -178,6 +179,9 @@ extension BCChatViewController: BCChatRoomProtocol {
                 // Update user's name in local cache
                 chatroomUsers[peripheralID] = name
 
+                // Update info view controller
+                infoViewController.refreshUserTable(Array(chatroomUsers.values))
+
                 // Create and add status message to local database
                 let message = BCMessage(message: "Changed their name to \(name)", name: oldName, isStatus: true, peripheralID: peripheralID)
                 BCDefaults.appendDataObjectToArray(message, forKey: .Messages)
@@ -191,6 +195,9 @@ extension BCChatViewController: BCChatRoomProtocol {
             // Add user to local cache
             chatroomUsers[peripheralID] = name
 
+            // Update info view controller
+            infoViewController.refreshUserTable(Array(chatroomUsers.values))
+
             // Create and add status message to local database
             let message = BCMessage(message: "Joined the room", name: name, isStatus: true, peripheralID: peripheralID)
             BCDefaults.appendDataObjectToArray(message, forKey: .Messages)
@@ -198,6 +205,7 @@ extension BCChatViewController: BCChatRoomProtocol {
             // Send status message
             updateWithNewMessage(message)
         }
+
         title = "Chatroom (\(chatroomUsers.count + 1))"
     }
 
@@ -206,6 +214,9 @@ extension BCChatViewController: BCChatRoomProtocol {
 
             // Remove user from local cache
             chatroomUsers.removeValueForKey(peripheralID)
+
+            // Update info view controller
+            infoViewController.refreshUserTable(Array(chatroomUsers.values))
 
             // Create and add status message to local database
             let message = BCMessage(message: "Left the room", name: name, isStatus: true, peripheralID: peripheralID)
@@ -236,30 +247,6 @@ extension BCChatViewController {
             UIPasteboard.generalPasteboard().string = cell.chatMessage
         }
     }
-}
-
-// MARK: UITableViewDataSource
-
-extension BCChatViewController {
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cachedMessages.count
-    }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        // Initialize or dequeue a cell
-        let cell = tableView.dequeueReusableCellWithIdentifier(CHAT_CELL_IDENTIFIER, forIndexPath: indexPath) as! BCChatTableViewCell
-        cell.transform = tableView.transform
-        cell.selectionStyle = .None
-
-        // Set the message and meta data for the cell
-        if indexPath.row < cachedMessages.count {
-            let message = cachedMessages[indexPath.row]
-            cell.message = message
-            cell.showMetaData = isDifferentThanPreviousMessage(cachedMessages, indexPath: indexPath)
-        }
-        return cell
-    }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.row < cachedMessages.count {
@@ -287,6 +274,30 @@ extension BCChatViewController {
             }
         }
         return tableView.rowHeight
+    }
+}
+
+// MARK: UITableViewDataSource
+
+extension BCChatViewController {
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cachedMessages.count
+    }
+
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // Initialize or dequeue a cell
+        let cell = tableView.dequeueReusableCellWithIdentifier(CHAT_CELL_IDENTIFIER, forIndexPath: indexPath) as! BCChatTableViewCell
+        cell.transform = tableView.transform
+        cell.selectionStyle = .None
+
+        // Set the message and meta data for the cell
+        if indexPath.row < cachedMessages.count {
+            let message = cachedMessages[indexPath.row]
+            cell.message = message
+            cell.showMetaData = isDifferentThanPreviousMessage(cachedMessages, indexPath: indexPath)
+        }
+        return cell
     }
 }
 
