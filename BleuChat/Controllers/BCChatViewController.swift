@@ -211,7 +211,9 @@ extension BCChatViewController: BCChatRoomProtocol {
             self.tableView.endUpdates()
 
             // Vibrate phone when receiving new message
-            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            if !message.isSelf {
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            }
 
             // Scroll to most recent message if user sent it
             if message.isSelf {
@@ -236,6 +238,10 @@ extension BCChatViewController: BCChatRoomProtocol {
 
                 // Send status message
                 updateWithNewMessage(message)
+
+                if !message.isSelf {
+                    AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                }
             }
 
         } else {
@@ -252,6 +258,10 @@ extension BCChatViewController: BCChatRoomProtocol {
 
             // Send status message
             updateWithNewMessage(message)
+
+            if !message.isSelf {
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            }
         }
 
         title = "Chatroom (\(chatroomUsers.count + 1))"
