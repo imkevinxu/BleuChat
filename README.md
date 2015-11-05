@@ -5,6 +5,8 @@ BleuChat iOS Codebase
 
 BleuChat is a Bluetooth Low Energy (BLE) powered chatting app.
 
+![Screenshot](screenshot.png)
+
 Setup
 -----
 
