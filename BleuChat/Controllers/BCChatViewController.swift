@@ -9,14 +9,27 @@
 import UIKit
 import CoreBluetooth
 import CocoaLumberjack
-import SnapKit
+import SlackTextViewController
 
 // MARK: - Properties
 
-final class BCChatViewController: UIViewController {
+final class BCChatViewController: SLKTextViewController {
 
     var centralManager: BCCentralManager!
     var peripheralManager: BCPeripheralManager!
+    var cachedMessages: [BCMessage]!
+    var cachedHeights: [Int: CGFloat] = [:]
+    var chatroomUsers: [String] = []
+
+    // MARK: Initializers
+
+    init() {
+        super.init(tableViewStyle: .Plain)
+    }
+
+    required convenience init!(coder decoder: NSCoder!) {
+        self.init()
+    }
 }
 
 // MARK: - View Lifecycle
@@ -25,40 +38,58 @@ extension BCChatViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureViewController()
         setupViewController()
-        centralManager.delegate = self
-        peripheralManager.delegate = self
     }
 
     override func viewWillDisappear(animated: Bool) {
+
+        // Stop scanning if view controller disappears
         centralManager.stopScanning()
         peripheralManager.stopAdvertising()
-
         super.viewWillDisappear(animated)
+    }
+
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+
+        // Reset cachedHeights on orientation change
+        cachedHeights = [:]
     }
 
     // MARK: Setup Methods
 
+    private func configureViewController() {
+
+        // Set delegates
+        centralManager.delegate = self
+        peripheralManager.delegate = self
+
+        // Configure text input
+        shakeToClearEnabled = true
+
+        // Retrieve cached messages from local database
+        cachedMessages = BCDefaults.dataObjectArrayForKey(.Messages)?.reverse() as [BCMessage]!
+
+        // Register custom table view cell class for reuse
+        tableView.registerClass(BCChatTableViewCell.self, forCellReuseIdentifier: CHAT_CELL_IDENTIFIER)
+    }
+
     private func setupViewController() {
-        title = "Chat"
+        title = "Chatroom (\(chatroomUsers.count + 1))"
+
+        // Set navigation bar items
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "scanButtonTapped:")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Info"), style: .Plain, target: self, action: nil)
 
-        let sendButton = UIButton(type: .System)
-        sendButton.setTitle("Send Message", forState: .Normal)
-        sendButton.addTarget(self, action: "sendButtonTapped:", forControlEvents: .TouchUpInside)
-        view.addSubview(sendButton)
-        sendButton.snp_makeConstraints { make in
-            make.center.equalTo(view)
-        }
+        // Setup table view
+        tableView.separatorStyle = .None
+        tableView.allowsSelection = false
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = tableView.rowHeight
 
-        let messagesButton = UIButton(type: .System)
-        messagesButton.setTitle("View Messages", forState: .Normal)
-        messagesButton.addTarget(self, action: "messagesButtonTapped:", forControlEvents: .TouchUpInside)
-        view.addSubview(messagesButton)
-        messagesButton.snp_makeConstraints { make in
-            make.center.equalTo(view).offset(CGPointMake(0, -100))
-        }
+        // Change text view placeholder
+        textView.placeholder = "Type a message…"
     }
 }
 
@@ -67,36 +98,172 @@ extension BCChatViewController {
 
 extension BCChatViewController {
 
-    func sendButtonTapped(sender: UIButton) {
-        BCDefaults.setObject("Kevin Xu", forKey: .Name)
-        peripheralManager.sendMessage("Hello World!")
-    }
-
     func scanButtonTapped(sender: UIButton) {
-        centralManager.startScanning()
-        peripheralManager.startAdvertising()
+
+        // Start looking for connections for 8 seconds
+        centralManager.startScanning(8)
+        peripheralManager.startAdvertising(8)
     }
 
-    func messagesButtonTapped(sender: UIButton) {
-        if let messages: [BCMessage] = BCDefaults.dataObjectArrayForKey(.Messages) {
-            DDLogInfo("\(messages)")
-        } else {
-            DDLogInfo("NIL")
-        }
-        BCDefaults.resetDefaults()
+    override func didPressRightButton(sender: AnyObject!) {
+
+        // Finish any auto-correction
+        textView.refreshFirstResponder()
+
+        // Send trimmed message and reset text view
+        peripheralManager.sendMessage(self.textView.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()))
+        textView.text = ""
+
+        super.didPressRightButton(sender)
     }
 }
 
 // MARK: - Delegates
 
-// MARK: BCMessageable
+// MARK: BCChatRoomProtocol
 
-extension BCChatViewController: BCMessageable {
+extension BCChatViewController: BCChatRoomProtocol {
+
+    func didStartScanning() {
+        title = "Scanning…"
+
+        // Replace scan button with activity indicator
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: activityIndicator)
+    }
+
+    func didFinishScanning() {
+        title = "Chatroom (\(chatroomUsers.count + 1))"
+
+        // Add the scan button back
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "scanButtonTapped:")
+    }
+
     func updateWithNewMessage(message: BCMessage) {
-        if message.isSelf {
-            DDLogInfo("You said: \(message.message)")
-        } else {
-            DDLogInfo("NEW: \(message.message) from \(message.name)")
+
+        // Cache new message locally
+        cachedMessages.insert(message, atIndex: 0)
+
+        // Asynchronously update the table view with the new message
+        dispatch_async(dispatch_get_main_queue(), {
+            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+            self.tableView.beginUpdates()
+            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
+            self.tableView.endUpdates()
+
+            // Scroll to most recent message if user sent it
+            if message.isSelf {
+                self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+            }
+            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        })
+    }
+}
+
+// MARK: UITableViewDelegate
+
+extension BCChatViewController {
+
+    override func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+        return action == "copy:"
+    }
+
+    override func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+        if action == "copy:" {
+            let cell = self.tableView(tableView, cellForRowAtIndexPath: indexPath) as! BCChatTableViewCell
+            UIPasteboard.generalPasteboard().string = cell.chatMessage
         }
+    }
+}
+
+// MARK: UITableViewDataSource
+
+extension BCChatViewController {
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cachedMessages.count
+    }
+
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // Initialize or dequeue a cell
+        let cell = tableView.dequeueReusableCellWithIdentifier(CHAT_CELL_IDENTIFIER, forIndexPath: indexPath) as! BCChatTableViewCell
+        cell.transform = tableView.transform
+        cell.selectionStyle = .None
+
+        // Set the message and meta data for the cell
+        if indexPath.row < cachedMessages.count {
+            let message = cachedMessages[indexPath.row]
+            cell.message = message
+            cell.showMetaData = isDifferentThanPreviousMessage(cachedMessages, indexPath: indexPath)
+        }
+        return cell
+    }
+
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.row < cachedMessages.count {
+            let message = cachedMessages[indexPath.row]
+
+            // Return cached height if it's been stored
+            if cachedHeights[message.hashValue] != nil {
+                return cachedHeights[message.hashValue]!
+            } else {
+
+                // Set the message and meta data for the cell
+                let cell = BCChatTableViewCell(style: .Default, reuseIdentifier: CHAT_CELL_IDENTIFIER)
+                cell.message = message
+                cell.showMetaData = isDifferentThanPreviousMessage(cachedMessages, indexPath: indexPath)
+
+                // Relayout the cell's subviews
+                cell.layoutIfNeeded()
+
+                // Resizes labels for rotation
+                cell.layoutMessageLabelWithNewContainerWidth(tableView.bounds.width)
+
+                // Cache the height of the cell to reduce future calculations
+                cachedHeights[message.hashValue] = cell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+                return cachedHeights[message.hashValue]!
+            }
+        }
+        return tableView.rowHeight
+    }
+}
+
+// MARK: UIGestureRecognizerDelegate
+
+extension BCChatViewController {
+
+    override func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+
+        // Don't hide keyboard on tapping table view
+        if textView.isFirstResponder() && gestureRecognizer == singleTapGesture {
+            return false
+        }
+        return true
+    }
+}
+
+// MARK: - Helper Methods
+
+extension BCChatViewController {
+
+    // Helper function to determine if current messsage should show meta data or not
+    // Returns true if previous message is either a different user or older than 5 minutes
+    func isDifferentThanPreviousMessage(messages: [BCMessage], indexPath: NSIndexPath) -> Bool {
+        if indexPath.row == messages.count - 1 {
+            return true
+        } else if indexPath.row < messages.count - 1 {
+            let currentMessage = messages[indexPath.row]
+            let previousMessage = messages[indexPath.row + 1]
+            if currentMessage.isDifferentUserThan(previousMessage) || currentMessage.isSignificantlyOlderThan(previousMessage) {
+                return true
+            }
+        }
+        return false
     }
 }
