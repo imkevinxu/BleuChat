@@ -110,8 +110,8 @@ extension BCCentralManager: CBCentralManagerDelegate {
                 return
         }
 
-        // Central is ON so start scanning for 10 seconds
-        startScanning(10)
+        // Central is ON so start scanning for 60 seconds
+        startScanning(60)
 
         // Repeat scanning every minute for 3 seconds
         timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "startScanningFromTimer:", userInfo: 3, repeats: true)

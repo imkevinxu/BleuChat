@@ -93,7 +93,7 @@ extension BCPeripheralManager {
         }
 
         if let oldName = oldName where isSelf {
-            let message = BCMessage(message: "Changed their name to \(name)", name: oldName, isSelf: true, isStatus: true)
+            let message = BCMessage(message: "> Changed their name to \(name)", name: oldName, isSelf: true, isStatus: true)
             BCDefaults.appendDataObjectToArray(message, forKey: .Messages)
             delegate?.updateWithNewMessage(message)
         }
@@ -178,8 +178,8 @@ extension BCPeripheralManager: CBPeripheralManagerDelegate {
                 return
         }
 
-        // Peripheral is ON so start advertising for 10 seconds
-        startAdvertising(10)
+        // Peripheral is ON so start advertising for 60 seconds
+        startAdvertising(60)
 
         // Repeat advertising every minute for 3 seconds
         timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "startAdvertisingFromTimer:", userInfo: 3, repeats: true)
