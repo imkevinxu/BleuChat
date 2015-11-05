@@ -86,7 +86,11 @@ extension BCChatTableViewCell {
                 make.top.equalTo(contentView).offset(12)
                 make.left.equalTo(contentView).offset(16)
                 make.right.equalTo(contentView).offset(-16)
-                make.bottom.equalTo(messageLabel!.snp_top).offset(-2)
+                if message.isStatus {
+                    make.bottom.equalTo(messageLabel!.snp_top).offset(-3)
+                } else {
+                    make.bottom.equalTo(messageLabel!.snp_top).offset(-2)
+                }
             }
         }
     }
@@ -117,7 +121,7 @@ extension BCChatTableViewCell {
         timeFormatter.timeStyle = .ShortStyle
 
         // Create label and attributed string
-        let metaDataLabel = UILabel(frame: CGRectZero)
+        let metaDataLabel = UILabel()
         let metaDataDate = "\(dateFormatter.stringFromDate(message.timestamp)), \(timeFormatter.stringFromDate(message.timestamp))"
         let metaDataAttributedString = NSMutableAttributedString(string: "\(message.name)  \(metaDataDate)")
 
@@ -149,13 +153,24 @@ extension BCChatTableViewCell {
 
     private func styledMessageLabel(message: BCMessage) -> UILabel {
 
-        // Create and style basic label with infinite lines
         let messageLabel = UILabel()
-        messageLabel.text = message.message
-        messageLabel.font = UIFont.systemFontOfSize(17)
-        messageLabel.lineBreakMode = .ByWordWrapping
-        messageLabel.numberOfLines = 0
-        messageLabel.preferredMaxLayoutWidth = contentView.bounds.width - 32
+        if message.isStatus {
+
+            // Style attributed string for statuses
+            let statusMessageAttributedString = NSMutableAttributedString(string: message.message, attributes: [
+                NSFontAttributeName: UIFont.italicSystemFontOfSize(15),
+                NSForegroundColorAttributeName: UIColor.grayColor()
+            ])
+            messageLabel.attributedText = statusMessageAttributedString
+        } else {
+
+            // Style basic label with infinite lines
+            messageLabel.text = message.message
+            messageLabel.font = UIFont.systemFontOfSize(17)
+            messageLabel.lineBreakMode = .ByWordWrapping
+            messageLabel.numberOfLines = 0
+            messageLabel.preferredMaxLayoutWidth = contentView.bounds.width - 32
+        }
         return messageLabel
     }
 }

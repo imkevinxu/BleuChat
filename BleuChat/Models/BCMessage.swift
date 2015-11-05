@@ -16,6 +16,7 @@ final class BCMessage: NSObject, NSCoding {
     var message: String
     var name: String
     var isSelf: Bool
+    var isStatus: Bool
     var timestamp: NSDate
     var peripheralID: NSUUID?
 
@@ -27,10 +28,11 @@ final class BCMessage: NSObject, NSCoding {
 
     // MARK: Initializers
 
-    init(message: String, name: String, isSelf: Bool = false, timestamp: NSDate = NSDate(), peripheralID: NSUUID? = nil) {
+    init(message: String, name: String, isSelf: Bool = false, isStatus: Bool = false, timestamp: NSDate = NSDate(), peripheralID: NSUUID? = nil) {
         self.message = message
         self.name = name
         self.isSelf = isSelf
+        self.isStatus = isStatus
         self.timestamp = timestamp
         self.peripheralID = peripheralID
     }
@@ -49,6 +51,7 @@ final class BCMessage: NSObject, NSCoding {
             message: message,
             name: name,
             isSelf: decoder.decodeBoolForKey("isSelf"),
+            isStatus: decoder.decodeBoolForKey("isStatus"),
             timestamp: timestamp,
             peripheralID: decoder.decodeObjectForKey("peripheralID") as? NSUUID
         )
@@ -58,6 +61,7 @@ final class BCMessage: NSObject, NSCoding {
         coder.encodeObject(message, forKey: "message")
         coder.encodeObject(name, forKey: "name")
         coder.encodeBool(isSelf, forKey: "isSelf")
+        coder.encodeBool(isStatus, forKey: "isStatus")
         coder.encodeObject(timestamp, forKey: "timestamp")
         coder.encodeObject(peripheralID, forKey: "peripheralID")
     }
@@ -82,7 +86,7 @@ extension BCMessage {
     func isDifferentUserThan(message: BCMessage) -> Bool {
         if let peripheralID = peripheralID,
                messagePeripheralID = message.peripheralID {
-            return peripheralID != messagePeripheralID
+            return peripheralID != messagePeripheralID || name != message.name
         }
         return isSelf != message.isSelf
     }
