@@ -17,10 +17,11 @@ final class BCCentralManager: NSObject {
     var centralManager: CBCentralManager!
     var discoveredPeripherals: [CBPeripheral]!
     var dataStorage: [NSUUID: NSMutableData]!
+    var timer: NSTimer?
 
     // MARK: Delegate
 
-    weak var delegate: BCMessageable?
+    weak var delegate: BCChatRoomProtocol?
 
     // MARK: Initializer
 
@@ -36,19 +37,29 @@ final class BCCentralManager: NSObject {
 
 extension BCCentralManager {
 
-    func startScanning() {
-        DDLogInfo("Central started scanning")
+    func startScanning(s: Double, indicate: Bool = true) {
+        DDLogInfo("Central started scanning for \(s) seconds")
         centralManager.scanForPeripheralsWithServices([SERVICE_CHAT_UUID], options: nil)
+        if indicate {
+            delegate?.didStartScanning()
+        }
 
-        // Central scans for only 10 seconds
-        delay(10) {
+        // Central scans for some time and then stops
+        delay(s) {
             self.stopScanning()
+        }
+    }
+
+    func startScanningFromTimer(timer: NSTimer) {
+        if timer.userInfo is Double {
+            startScanning(timer.userInfo as! Double, indicate: false)
         }
     }
 
     func stopScanning() {
         DDLogInfo("Central stopped scanning")
         centralManager.stopScan()
+        delegate?.didFinishScanning()
     }
 }
 
@@ -92,12 +103,18 @@ extension BCCentralManager: CBCentralManagerDelegate {
                 DDLogDebug("Central is powered ON")
             default:
                 DDLogWarn("Central is powered OFF")
+                if let timer = timer {
+                    timer.invalidate()
+                }
                 UIApplication.presentAlert(title: "Bluetooth is Off", message: "Please turn on Bluetooth for Bleuchat to communicate with other devices")
                 return
         }
 
-        // Central is ON so start scanning
-        startScanning()
+        // Central is ON so start scanning for 10 seconds
+        startScanning(10)
+
+        // Repeat scanning every minute for 3 seconds
+        timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "startScanningFromTimer:", userInfo: 3, repeats: true)
     }
 
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
@@ -214,11 +231,9 @@ extension BCCentralManager: CBPeripheralDelegate {
                 {
                     let message = message as! String
                     let name = name as! String
-                    let messageObject = BCMessage(message: message, name: name)
+                    let messageObject = BCMessage(message: message, name: name, peripheralID: peripheral.identifier)
                     BCDefaults.appendDataObjectToArray(messageObject, forKey: .Messages)
-                    if let delegate = delegate {
-                        delegate.updateWithNewMessage(messageObject)
-                    }
+                    delegate?.updateWithNewMessage(messageObject)
                     DDLogInfo("Central received message: \"\(message)\" from \"\(name)\"")
                 }
                 dataStorage[peripheral.identifier] = NSMutableData()

@@ -19,10 +19,11 @@ final class BCPeripheralManager: NSObject {
     var sendingData: NSData = NSData()
     var sendingDataIndex: Int = 0
     var sendingEOM: Bool = false
+    var timer: NSTimer?
 
     // MARK: Delegate
 
-    weak var delegate: BCMessageable?
+    weak var delegate: BCChatRoomProtocol?
 
     // MARK: Initializer
 
@@ -37,18 +38,24 @@ final class BCPeripheralManager: NSObject {
 
 extension BCPeripheralManager {
 
-    func startAdvertising() {
+    func startAdvertising(s: Double) {
         let deviceName = "\(UIDevice.currentDevice().name) - \(Int(NSDate().timeIntervalSinceReferenceDate * 1000000))"
 
-        DDLogInfo("Peripheral started advertising as \"\(deviceName)\"")
+        DDLogInfo("Peripheral started advertising for \(s) seconds")
         peripheralManager.startAdvertising([
             CBAdvertisementDataLocalNameKey: deviceName,
             CBAdvertisementDataServiceUUIDsKey: [SERVICE_CHAT_UUID]
         ])
 
         // Peripheral advertises for only 10 seconds
-        delay(10) {
+        delay(s) {
             self.stopAdvertising()
+        }
+    }
+
+    func startAdvertisingFromTimer(timer: NSTimer) {
+        if timer.userInfo is Double {
+            startAdvertising(timer.userInfo as! Double)
         }
     }
 
@@ -69,9 +76,7 @@ extension BCPeripheralManager {
 
         let messageObject = BCMessage(message: message, name: name, isSelf: true)
         BCDefaults.appendDataObjectToArray(messageObject, forKey: .Messages)
-        if let delegate = delegate {
-            delegate.updateWithNewMessage(messageObject)
-        }
+        delegate?.updateWithNewMessage(messageObject)
         DDLogInfo("Peripheral sending message: \"\(message)\"")
         sendData()
     }
@@ -137,17 +142,24 @@ extension BCPeripheralManager: CBPeripheralManagerDelegate {
         switch peripheral.state {
             case .PoweredOn:
                 DDLogDebug("Peripheral is powered ON")
+                peripheralManager.removeAllServices()
                 let transferService = CBMutableService(type: SERVICE_CHAT_UUID, primary: true)
                 transferService.characteristics = [transferCharacteristic]
                 peripheralManager.addService(transferService)
             default:
                 DDLogWarn("Peripheral is powered OFF")
+                if let timer = timer {
+                    timer.invalidate()
+                }
                 UIApplication.presentAlert(title: "Bluetooth is Off", message: "Please turn on Bluetooth for Bleuchat to communicate with other devices")
                 return
         }
 
-        // Peripheral is ON so start advertising
-        startAdvertising()
+        // Peripheral is ON so start advertising for 10 seconds
+        startAdvertising(10)
+
+        // Repeat advertising every minute for 3 seconds
+        timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "startAdvertisingFromTimer:", userInfo: 3, repeats: true)
     }
 
     func peripheralManager(peripheral: CBPeripheralManager, didAddService service: CBService, error: NSError?) {

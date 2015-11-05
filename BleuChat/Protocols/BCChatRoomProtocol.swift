@@ -1,5 +1,5 @@
 //
-//  BCMessageable.swift
+//  BCChatRoomProtocol.swift
 //  BleuChat
 //
 //  Created by Kevin Xu on 11/3/15.
@@ -8,7 +8,10 @@
 
 import Foundation
 
-protocol BCMessageable: class {
+protocol BCChatRoomProtocol: class {
+
+    func didStartScanning()
+    func didFinishScanning()
 
     func updateWithNewMessage(message: BCMessage)
 }
