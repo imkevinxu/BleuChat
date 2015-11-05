@@ -15,9 +15,11 @@ import CocoaLumberjack
 final class BCPeripheralManager: NSObject {
 
     var peripheralManager: CBPeripheralManager!
-    var transferCharacteristic: CBMutableCharacteristic!
+    var messageCharacteristic: CBMutableCharacteristic!
+    var nameCharacteristic: CBMutableCharacteristic!
     var sendingData: NSData = NSData()
     var sendingDataIndex: Int = 0
+    var sendingCharacteristic: CBMutableCharacteristic!
     var sendingEOM: Bool = false
     var timer: NSTimer?
 
@@ -30,7 +32,8 @@ final class BCPeripheralManager: NSObject {
     override init() {
         super.init()
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
-        transferCharacteristic = CBMutableCharacteristic(type: CHARACTERISTIC_CHAT_UUID, properties: .Notify, value: nil, permissions: .Readable)
+        messageCharacteristic = CBMutableCharacteristic(type: CHARACTERISTIC_MESSAGE_UUID, properties: .Notify, value: nil, permissions: .Readable)
+        nameCharacteristic = CBMutableCharacteristic(type: CHARACTERISTIC_NAME_UUID, properties: .Notify, value: nil, permissions: .Readable)
     }
 }
 
@@ -69,15 +72,29 @@ extension BCPeripheralManager {
             UIApplication.presentAlert(title: "Name Not Set", message: "Please enter your name by clicking the information icon in the top right corner")
             return
         }
-        sendingData = NSKeyedArchiver.archivedDataWithRootObject([
-            "message": message,
-            "name": name
-        ])
 
         let messageObject = BCMessage(message: message, name: name, isSelf: true)
         BCDefaults.appendDataObjectToArray(messageObject, forKey: .Messages)
         delegate?.updateWithNewMessage(messageObject)
         DDLogInfo("Peripheral sending message: \"\(message)\"")
+
+        sendingData = NSKeyedArchiver.archivedDataWithRootObject([
+            "message": message,
+            "name": name
+        ])
+        sendingCharacteristic = messageCharacteristic
+        sendData()
+    }
+
+    func sendName() {
+        guard let name = BCDefaults.stringForKey(.Name) else {
+            UIApplication.presentAlert(title: "Name Not Set", message: "Please enter your name by clicking the information icon in the top right corner")
+            return
+        }
+
+        DDLogInfo("Peripheral sending name: \"\(name)\"")
+        sendingData = name.dataUsingEncoding(NSUTF8StringEncoding)!
+        sendingCharacteristic = nameCharacteristic
         sendData()
     }
 }
@@ -91,7 +108,7 @@ extension BCPeripheralManager {
         var didSend = true
 
         if sendingEOM {
-            didSend = peripheralManager.updateValue(eomData, forCharacteristic: transferCharacteristic, onSubscribedCentrals: nil)
+            didSend = peripheralManager.updateValue(eomData, forCharacteristic: sendingCharacteristic, onSubscribedCentrals: nil)
             if didSend {
                 sendingEOM = false
                 DDLogDebug("Peripheral sent: <EOM>")
@@ -111,7 +128,7 @@ extension BCPeripheralManager {
             }
 
             let chunk = NSData(bytes: sendingData.bytes + sendingDataIndex, length: amountToSend)
-            didSend = peripheralManager.updateValue(chunk, forCharacteristic: transferCharacteristic, onSubscribedCentrals: nil)
+            didSend = peripheralManager.updateValue(chunk, forCharacteristic: sendingCharacteristic, onSubscribedCentrals: nil)
             if !didSend {
                 return
             }
@@ -121,7 +138,7 @@ extension BCPeripheralManager {
             if sendingDataIndex >= sendingData.length {
                 sendingEOM = true
                 sendingDataIndex = 0
-                didSend = peripheralManager.updateValue(eomData, forCharacteristic: transferCharacteristic, onSubscribedCentrals: nil)
+                didSend = peripheralManager.updateValue(eomData, forCharacteristic: sendingCharacteristic, onSubscribedCentrals: nil)
                 if didSend {
                     sendingEOM = false
                     DDLogDebug("Peripheral sent: <EOM>")
@@ -144,7 +161,7 @@ extension BCPeripheralManager: CBPeripheralManagerDelegate {
                 DDLogDebug("Peripheral is powered ON")
                 peripheralManager.removeAllServices()
                 let transferService = CBMutableService(type: SERVICE_CHAT_UUID, primary: true)
-                transferService.characteristics = [transferCharacteristic]
+                transferService.characteristics = [messageCharacteristic, nameCharacteristic]
                 peripheralManager.addService(transferService)
             default:
                 DDLogWarn("Peripheral is powered OFF")
@@ -176,6 +193,9 @@ extension BCPeripheralManager: CBPeripheralManagerDelegate {
 
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didSubscribeToCharacteristic characteristic: CBCharacteristic) {
         DDLogDebug("Peripheral's \"\(BCTranslator.characteristicName(characteristic))\" has been subscribed to by a central")
+        if characteristic.UUID == CHARACTERISTIC_NAME_UUID {
+            sendName()
+        }
     }
 
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFromCharacteristic characteristic: CBCharacteristic) {

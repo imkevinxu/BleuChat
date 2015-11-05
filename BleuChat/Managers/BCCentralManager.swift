@@ -16,7 +16,7 @@ final class BCCentralManager: NSObject {
 
     var centralManager: CBCentralManager!
     var discoveredPeripherals: [CBPeripheral]!
-    var dataStorage: [NSUUID: NSMutableData]!
+    var dataStorage: [NSUUID: [CBUUID: NSMutableData]]!
     var timer: NSTimer?
 
     // MARK: Delegate
@@ -77,8 +77,8 @@ extension BCCentralManager {
             for service in services {
                 if let characteristics = service.characteristics {
                     for characteristic in characteristics {
-                        if characteristic.UUID == CHARACTERISTIC_CHAT_UUID {
-                            if characteristic.isNotifying {
+                        if characteristic.isNotifying {
+                            if characteristic.UUID == CHARACTERISTIC_MESSAGE_UUID || characteristic.UUID == CHARACTERISTIC_NAME_UUID {
                                 peripheral.setNotifyValue(false, forCharacteristic: characteristic)
                             }
                         }
@@ -133,7 +133,7 @@ extension BCCentralManager: CBCentralManagerDelegate {
         DDLogInfo("Central connected to \"\(BCTranslator.peripheralName(peripheral))\"")
 
         // Initialize empty data for peripheral and start looking for services
-        dataStorage[peripheral.identifier] = NSMutableData()
+        dataStorage[peripheral.identifier] = [:]
         peripheral.delegate = self
         peripheral.discoverServices([SERVICE_CHAT_UUID])
     }
@@ -144,6 +144,7 @@ extension BCCentralManager: CBCentralManagerDelegate {
         // Remove peripheral and corresponding data from memory
         discoveredPeripherals.removeObject(peripheral)
         dataStorage.removeValueForKey(peripheral.identifier)
+        delegate?.userLeft(peripheral.identifier)
     }
 
     func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
@@ -167,7 +168,7 @@ extension BCCentralManager: CBPeripheralDelegate {
 
         if let services = peripheral.services {
             for service in services {
-                peripheral.discoverCharacteristics([CHARACTERISTIC_CHAT_UUID], forService: service)
+                peripheral.discoverCharacteristics([CHARACTERISTIC_MESSAGE_UUID, CHARACTERISTIC_NAME_UUID], forService: service)
             }
         }
     }
@@ -183,7 +184,7 @@ extension BCCentralManager: CBPeripheralDelegate {
             for characteristic in characteristics {
 
                 // Found desired characteristics on peripheral so subscribe to it
-                if characteristic.UUID == CHARACTERISTIC_CHAT_UUID {
+                if characteristic.UUID == CHARACTERISTIC_MESSAGE_UUID || characteristic.UUID == CHARACTERISTIC_NAME_UUID {
                     DDLogDebug("Central subscribed to \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
                     peripheral.setNotifyValue(true, forCharacteristic: characteristic)
                 }
@@ -198,7 +199,7 @@ extension BCCentralManager: CBPeripheralDelegate {
             return
         }
 
-        if characteristic.UUID == CHARACTERISTIC_CHAT_UUID {
+        if characteristic.UUID == CHARACTERISTIC_MESSAGE_UUID || characteristic.UUID == CHARACTERISTIC_NAME_UUID {
             if characteristic.isNotifying {
                 DDLogDebug("Central will be notified by \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
             } else {
@@ -215,16 +216,17 @@ extension BCCentralManager: CBPeripheralDelegate {
             return
         }
 
-        if characteristic.UUID == CHARACTERISTIC_CHAT_UUID {
-            guard let data = characteristic.value else {
-                DDLogWarn("Central received empty data from \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
-                return
-            }
+        guard let data = characteristic.value else {
+            DDLogWarn("Central received empty data from \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
+            return
+        }
 
-            if let dataString = String(data: data, encoding: NSUTF8StringEncoding),
-                   dataStore = dataStorage[peripheral.identifier]
-               where dataString == "EOM"
-            {
+        if let dataString = String(data: data, encoding: NSUTF8StringEncoding),
+               dataStore = dataStorage[peripheral.identifier]![characteristic.UUID]
+           where dataString == "EOM"
+        {
+
+            if characteristic.UUID == CHARACTERISTIC_MESSAGE_UUID {
                 if let dataDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(dataStore),
                     message = dataDictionary["message"],
                     name = dataDictionary["name"]
@@ -236,19 +238,25 @@ extension BCCentralManager: CBPeripheralDelegate {
                     delegate?.updateWithNewMessage(messageObject)
                     DDLogInfo("Central received message: \"\(message)\" from \"\(name)\"")
                 }
-                dataStorage[peripheral.identifier] = NSMutableData()
 
-            } else {
-
-                // Append data chunks to local storage
-                if let dataStore = dataStorage[peripheral.identifier] {
-                    dataStore.appendData(data)
-                    dataStorage[peripheral.identifier] = dataStore
-                } else {
-                    dataStorage[peripheral.identifier] = NSMutableData(data: data)
+            } else if characteristic.UUID == CHARACTERISTIC_NAME_UUID {
+                if let name = String(data: dataStore, encoding: NSUTF8StringEncoding) {
+                    delegate?.userJoined(name, peripheralID: peripheral.identifier)
+                    DDLogInfo("Central received name: \"\(name)\"")
                 }
-                DDLogDebug("Central received chunk \"\(data)\" from \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
             }
+            dataStorage[peripheral.identifier]![characteristic.UUID] = NSMutableData()
+
+        } else {
+
+            // Append data chunks to local storage for that peripheral and characteristic
+            if let dataStore = dataStorage[peripheral.identifier]![characteristic.UUID] {
+                dataStore.appendData(data)
+                dataStorage[peripheral.identifier]![characteristic.UUID] = dataStore
+            } else {
+                dataStorage[peripheral.identifier]![characteristic.UUID] = NSMutableData(data: data)
+            }
+            DDLogDebug("Central received chunk \"\(data)\" from \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
         }
     }
 }
