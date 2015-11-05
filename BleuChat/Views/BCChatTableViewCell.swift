@@ -51,27 +51,35 @@ extension BCChatTableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        layoutMessage(message!)
+        if let message = message {
+            layoutMessage(message)
+        }
     }
 
     private func layoutMessage(message: BCMessage) {
 
+        // Remove old labels from dequeued cell if exists
+        if let messageLabel = messageLabel {
+            messageLabel.removeFromSuperview()
+        }
+        if let metaDataLabel = metaDataLabel {
+            metaDataLabel.removeFromSuperview()
+        }
+
         // Add and layout message label
-        if messageLabel == nil {
-            messageLabel = styledMessageLabel(message)
-            contentView.addSubview(messageLabel!)
-            messageLabel!.snp_makeConstraints { make in
-                if !showMetaData {
-                    make.top.equalTo(contentView)
-                }
-                make.left.equalTo(contentView).offset(16)
-                make.right.equalTo(contentView).offset(-16)
-                make.bottom.equalTo(contentView).offset(-8)
+        messageLabel = styledMessageLabel(message)
+        contentView.addSubview(messageLabel!)
+        messageLabel!.snp_makeConstraints { make in
+            if !showMetaData {
+                make.top.equalTo(contentView)
             }
+            make.left.equalTo(contentView).offset(16)
+            make.right.equalTo(contentView).offset(-16)
+            make.bottom.equalTo(contentView).offset(-8)
         }
 
         // Add and layout meta data label
-        if showMetaData && metaDataLabel == nil {
+        if showMetaData {
             metaDataLabel = styledMetaDataLabel(message)
             contentView.addSubview(metaDataLabel!)
             metaDataLabel!.snp_makeConstraints { make in
