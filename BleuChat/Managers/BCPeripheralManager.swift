@@ -73,11 +73,15 @@ extension BCPeripheralManager {
             return
         }
 
+        // Create message object and add to local database
         let messageObject = BCMessage(message: message, name: name, isSelf: true)
         BCDefaults.appendDataObjectToArray(messageObject, forKey: .Messages)
+
+        // Update chatroom with new message
         delegate?.updateWithNewMessage(messageObject)
         DDLogInfo("Peripheral sending message: \"\(message)\"")
 
+        // Send the message to connected devices
         sendingData = NSKeyedArchiver.archivedDataWithRootObject([
             "message": message,
             "name": name
@@ -92,12 +96,14 @@ extension BCPeripheralManager {
             return
         }
 
+        // Add status message to user who just changed their name
         if let oldName = oldName where isSelf {
             let message = BCMessage(message: "> Changed their name to \(name)", name: oldName, isSelf: true, isStatus: true)
             BCDefaults.appendDataObjectToArray(message, forKey: .Messages)
             delegate?.updateWithNewMessage(message)
         }
 
+        // Send change name status message to connected devices
         DDLogInfo("Peripheral sending name: \"\(name)\"")
         sendingData = name.dataUsingEncoding(NSUTF8StringEncoding)!
         sendingCharacteristic = nameCharacteristic
@@ -199,6 +205,8 @@ extension BCPeripheralManager: CBPeripheralManagerDelegate {
 
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didSubscribeToCharacteristic characteristic: CBCharacteristic) {
         DDLogDebug("Peripheral's \"\(BCTranslator.characteristicName(characteristic))\" has been subscribed to by a central")
+
+        // Send name to devices upon connection
         if characteristic.UUID == CHARACTERISTIC_NAME_UUID {
             sendName()
         }

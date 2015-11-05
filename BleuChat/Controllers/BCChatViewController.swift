@@ -117,6 +117,8 @@ extension BCChatViewController {
     }
 
     private func setupName() {
+
+        // Ask for name if user is opened app for the first time
         if BCDefaults.stringForKey(.Name) == nil {
             let alert = UIAlertController(title: "Welcome", message: "Please set your name, it can be anything you want!", preferredStyle: .Alert)
             alert.addTextFieldWithConfigurationHandler { textField in
@@ -384,6 +386,7 @@ extension BCChatViewController {
     func isDifferentThanPreviousMessage(messages: [BCMessage], indexPath: NSIndexPath) -> Bool {
         if indexPath.row == messages.count - 1 {
             return true
+
         } else if indexPath.row < messages.count - 1 {
             let currentMessage = messages[indexPath.row]
             let previousMessage = messages[indexPath.row + 1]

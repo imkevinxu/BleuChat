@@ -221,42 +221,62 @@ extension BCCentralManager: CBPeripheralDelegate {
             return
         }
 
+        // Detected EOM string in last chunk of data sent
         if let dataString = String(data: data, encoding: NSUTF8StringEncoding),
                dataStore = dataStorage[peripheral.identifier]![characteristic.UUID]
            where dataString == "EOM"
         {
-
+            // Received a message data blob
             if characteristic.UUID == CHARACTERISTIC_MESSAGE_UUID {
-                if let dataDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(dataStore),
-                    message = dataDictionary["message"],
-                    name = dataDictionary["name"]
-                {
-                    let message = message as! String
-                    let name = name as! String
-                    let messageObject = BCMessage(message: message, name: name, peripheralID: peripheral.identifier)
-                    BCDefaults.appendDataObjectToArray(messageObject, forKey: .Messages)
-                    delegate?.updateWithNewMessage(messageObject)
-                    DDLogInfo("Central received message: \"\(message)\" from \"\(name)\"")
-                }
+                receiveMessageData(dataStore, peripheral: peripheral)
 
+            // Received a name data blob
             } else if characteristic.UUID == CHARACTERISTIC_NAME_UUID {
-                if let name = String(data: dataStore, encoding: NSUTF8StringEncoding) {
-                    delegate?.userJoined(name, peripheralID: peripheral.identifier)
-                    DDLogInfo("Central received name: \"\(name)\"")
-                }
+                receiveNameData(dataStore, peripheral: peripheral)
             }
             dataStorage[peripheral.identifier]![characteristic.UUID] = NSMutableData()
 
         } else {
-
-            // Append data chunks to local storage for that peripheral and characteristic
-            if let dataStore = dataStorage[peripheral.identifier]![characteristic.UUID] {
-                dataStore.appendData(data)
-                dataStorage[peripheral.identifier]![characteristic.UUID] = dataStore
-            } else {
-                dataStorage[peripheral.identifier]![characteristic.UUID] = NSMutableData(data: data)
-            }
-            DDLogDebug("Central received chunk \"\(data)\" from \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
+            appendDataChunk(data, peripheral: peripheral, characteristic: characteristic)
         }
+    }
+}
+
+// MARK: - Helper Methods
+
+extension BCCentralManager {
+
+    private func receiveMessageData(dataStore: NSData, peripheral: CBPeripheral) {
+        if let dataDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(dataStore),
+            message = dataDictionary["message"],
+            name = dataDictionary["name"]
+        {
+            let message = message as! String
+            let name = name as! String
+            let messageObject = BCMessage(message: message, name: name, peripheralID: peripheral.identifier)
+            BCDefaults.appendDataObjectToArray(messageObject, forKey: .Messages)
+            delegate?.updateWithNewMessage(messageObject)
+            DDLogInfo("Central received message: \"\(message)\" from \"\(name)\"")
+        }
+    }
+
+    private func receiveNameData(dataStore: NSData, peripheral: CBPeripheral) {
+        if let name = String(data: dataStore, encoding: NSUTF8StringEncoding) {
+            delegate?.userJoined(name, peripheralID: peripheral.identifier)
+            DDLogInfo("Central received name: \"\(name)\"")
+        }
+    }
+
+    private func appendDataChunk(data: NSData, peripheral: CBPeripheral, characteristic: CBCharacteristic) {
+
+        // Append data chunks to local data storage for that peripheral and characteristic
+        // Once the EOM string is detected, we can unwrap the whole data object
+        if let dataStore = dataStorage[peripheral.identifier]![characteristic.UUID] {
+            dataStore.appendData(data)
+            dataStorage[peripheral.identifier]![characteristic.UUID] = dataStore
+        } else {
+            dataStorage[peripheral.identifier]![characteristic.UUID] = NSMutableData(data: data)
+        }
+        DDLogDebug("Central received chunk \"\(data)\" from \"\(BCTranslator.characteristicName(characteristic))\" on \"\(BCTranslator.peripheralName(peripheral))\"")
     }
 }

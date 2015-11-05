@@ -36,6 +36,7 @@ extension UIApplication {
         }
     }
 
+    // Present an alert from anywhere
     class func presentAlert(title title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .Cancel, handler: nil))
