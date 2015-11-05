@@ -12,7 +12,7 @@ import Foundation
 // Usage: delay(0.5) { foo() }
 // http://stackoverflow.com/a/24318861/4504948
 
-public func delay(delay:Double, closure:()->()) {
+public func delay(delay: Double, closure: ()->()) {
     dispatch_after(
         dispatch_time(
             DISPATCH_TIME_NOW,
