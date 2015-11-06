@@ -42,7 +42,7 @@ final class BCPeripheralManager: NSObject {
 extension BCPeripheralManager {
 
     func startAdvertising(s: Double) {
-        let deviceName = "\(UIDevice.currentDevice().name) - \(Int(NSDate().timeIntervalSinceReferenceDate * 1000000))"
+        let deviceName = "\(UIDevice.currentDevice().name) - \(NSDate().hashValue)"
 
         DDLogInfo("Peripheral started advertising for \(s) seconds")
         peripheralManager.startAdvertising([
