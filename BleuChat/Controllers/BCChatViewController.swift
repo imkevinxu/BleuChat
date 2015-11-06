@@ -205,24 +205,22 @@ extension BCChatViewController: BCChatRoomProtocol {
         // Cache new message locally
         cachedMessages.insert(message, atIndex: 0)
 
-        // Asynchronously update the table view with the new message
-        dispatch_async(dispatch_get_main_queue(), {
-            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-            self.tableView.beginUpdates()
-            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
-            self.tableView.endUpdates()
+        // Update the table view with the new message
+        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        tableView.beginUpdates()
+        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
+        tableView.endUpdates()
 
-            // Vibrate phone when receiving new message
-            if !message.isSelf {
-                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-            }
+        // Vibrate phone when receiving new message
+        if !message.isSelf {
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+        }
 
-            // Scroll to most recent message if user sent it
-            if message.isSelf {
-                self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
-            }
-            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        })
+        // Scroll to most recent message if user sent it
+        if message.isSelf {
+            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+        }
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
 
     func userJoined(name: String, peripheralID: NSUUID) {
