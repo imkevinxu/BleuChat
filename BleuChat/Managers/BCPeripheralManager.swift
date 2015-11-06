@@ -207,7 +207,7 @@ extension BCPeripheralManager: CBPeripheralManagerDelegate {
         DDLogDebug("Peripheral's \"\(BCTranslator.characteristicName(characteristic))\" has been subscribed to by a central")
 
         // Send name to devices upon connection
-        if characteristic.UUID == CHARACTERISTIC_NAME_UUID {
+        if characteristic.UUID == CHARACTERISTIC_NAME_UUID && BCDefaults.stringForKey(.Name) != nil {
             sendName()
         }
     }

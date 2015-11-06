@@ -131,6 +131,7 @@ extension BCChatViewController {
                 let nameTextField = alert.textFields![0]
                 if nameTextField.text != "" {
                     BCDefaults.setObject(nameTextField.text, forKey: .Name)
+                    self.peripheralManager.sendName()
                 } else {
                     self.setupName()
                 }
