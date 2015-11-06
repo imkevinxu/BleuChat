@@ -154,6 +154,9 @@ extension BCChatTableViewCell {
     private func styledMessageLabel(message: BCMessage) -> UILabel {
 
         let messageLabel = UILabel()
+        messageLabel.lineBreakMode = .ByWordWrapping
+        messageLabel.numberOfLines = 0
+        messageLabel.preferredMaxLayoutWidth = contentView.bounds.width - 32
         if message.isStatus {
 
             // Style attributed string for statuses
@@ -167,9 +170,6 @@ extension BCChatTableViewCell {
             // Style basic label with infinite lines
             messageLabel.text = message.message
             messageLabel.font = UIFont.systemFontOfSize(17)
-            messageLabel.lineBreakMode = .ByWordWrapping
-            messageLabel.numberOfLines = 0
-            messageLabel.preferredMaxLayoutWidth = contentView.bounds.width - 32
         }
         return messageLabel
     }
